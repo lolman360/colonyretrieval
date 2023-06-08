@@ -399,10 +399,10 @@
 	ammo_type = /obj/item/ammo_casing/c10x24
 	max_ammo = 80 //6.6 reloads of the SWAT, 2 of the bond, almost 1 full pulse mag
 
-//// 12mm heavy pistol
+//// 12.7mm heavy pistol
 
 /obj/item/ammo_magazine/ammobox/kurtz_50
-	name = "ammunition box (12mm)"
+	name = "ammunition box (12.7mm)"
 	icon_state = "box50"
 	matter = list(MATERIAL_CARDBOARD = 1)
 	caliber = CAL_50
@@ -410,36 +410,62 @@
 	max_ammo = 24
 
 /obj/item/ammo_magazine/ammobox/kurtz_50/rubber
-	name = "ammunition box (12mm rubber)"
+	name = "ammunition box (12.7mm rubber)"
 	icon_state = "box50-rubber"
 	ammo_type = /obj/item/ammo_casing/kurtz_50/rubber
 
 /obj/item/ammo_magazine/ammobox/kurtz_50/rubber/pepperball
-	name = "ammunition box (12mm pepperball)"
-	desc = "A box of police grade 12mm pepperball type rounds; complete with CO2 cartriage casings."
+	name = "ammunition box (12.7mm pepperball)"
+	desc = "A box of police grade 12.7mm pepperball type rounds; complete with CO2 cartriage casings."
 	icon_state = "box50-pepper"
 	ammo_type = /obj/item/ammo_casing/kurtz_50/rubber/pepperball
 
 /obj/item/ammo_magazine/ammobox/kurtz_50/practice
-	name = "ammunition box (12mm practice)"
+	name = "ammunition box (12.7mm practice)"
 	icon_state = "box50-practice"
 	ammo_type = /obj/item/ammo_casing/kurtz_50/practice
 
 /obj/item/ammo_magazine/ammobox/kurtz_50/hv
-	name = "ammunition box (12mm high-velocity)"
+	name = "ammunition box (12.7mm high-velocity)"
 	icon_state = "box50-hv"
 	ammo_type = /obj/item/ammo_casing/kurtz_50/hv
 
 /obj/item/ammo_magazine/ammobox/kurtz_50/lethal
-	name = "ammunition box (12mm hollow-point)"
-	desc = "A box of self-defense grade 12mm hollow-points."
+	name = "ammunition box (12.7mm hollow-point)"
+	desc = "A box of self-defense grade 12.7mm hollow-points."
 	icon_state = "box50-lethal"
 	ammo_type = /obj/item/ammo_casing/kurtz_50/lethal
 
 /obj/item/ammo_magazine/ammobox/kurtz_50/laser
-	name = "ammunition box (12mm laser)"
+	name = "ammunition box (12.7mm laser)"
 	icon_state = "box50-si"
 	ammo_type = /obj/item/ammo_casing/kurtz_50/laser
+
+/obj/item/ammo_magazine/ammobox/kurtz_50/large
+	name = "ammunition box (12.7mm)"
+	desc = "A large box of regular 12.7mm rounds."
+	matter = list(MATERIAL_STEEL = 15)
+	w_class = ITEM_SIZE_BULKY
+	max_ammo = 150
+	icon_state = "magbox"
+
+/obj/item/ammo_magazine/ammobox/kurtz_50/large/lethal
+	name = "ammunition box (12.7mm  hollow-point)"
+	desc = "A large box of self defense grade 9mm hollow-point rounds."
+	ammo_type = /obj/item/ammo_casing/kurtz_50/lethal
+	icon_state = "magboxhp"
+
+/obj/item/ammo_magazine/ammobox/kurtz_50/large/rubber
+	name = "ammunition box (12.7mm rubber)"
+	desc = "A large box of police grade 12.7mm rubber rounds."
+	ammo_type = /obj/item/ammo_casing/kurtz_50/rubber
+	icon_state = "magboxrubber"
+
+/obj/item/ammo_magazine/ammobox/kurtz_50/large/hv
+	name = "ammunition box (12.7mm high-velocity)"
+	desc = "A large box of high velocity 12.7mm rounds"
+	ammo_type = /obj/item/ammo_casing/kurtz_50/hv
+	icon_state = "magboxhv"
 
 //// 14.5×114mm ////
 
@@ -479,15 +505,15 @@
 
 //// 17.7mm rolled shot ////
 
-///obj/item/ammo_magazine/ammobox/ball
-//	name = "ammunition box (17.7mm rolled shot)"
-//	icon_state = "antim"
-//	desc = "A box of 17.7mm rolled shot."
-//	matter = list(MATERIAL_STEEL = 5)
-//	w_class = ITEM_SIZE_BULKY
-//	caliber = CAL_BALL
-//	ammo_type = /obj/item/ammo_casing/ball
-//	max_ammo = 30
+/obj/item/ammo_magazine/ammobox/ball
+	name = "ammunition box (rolled shot)"
+	icon_state = "antim"
+	desc = "A box of rolled shot."
+	matter = list(MATERIAL_STEEL = 5)
+	w_class = ITEM_SIZE_BULKY
+	caliber = CAL_BALL
+	ammo_type = /obj/item/ammo_casing/ball
+	max_ammo = 30
 
 //// 8.6mm Heavy Rifle ////
 

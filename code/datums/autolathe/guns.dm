@@ -84,34 +84,34 @@
 	name = "NM 10mm Magnum \"Liberty\""
 	build_path = /obj/item/gun/projectile/colt/liberty
 
-// 12mm H E A V Y
+// 12.7mm H E A V Y
 
 /datum/design/autolathe/gun/lamia
-	name = "SA HG 12mm \"Lamia\""
+	name = "SA HG 12.7mm \"Lamia\""
 	build_path = /obj/item/gun/projectile/lamia
 
 /datum/design/autolathe/gun/scoped_lamia
-	name = "Seinemetall Defense GmbH HG 12mm \"Argos\" Advanced"
+	name = "Seinemetall Defense GmbH HG 12.7mm \"Argos\" Advanced"
 	build_path = /obj/item/gun/projectile/lamia/scoped
 
 /datum/design/autolathe/gun/basilisk
-	name = "H&S HG 12mm \"Basilisk\""
+	name = "H&S HG 12.7mm \"Basilisk\""
 	build_path = /obj/item/gun/projectile/basilisk
 
 /datum/design/autolathe/gun/socom
-	name = "SolFed M6C 12mm \"SOCOM\""
+	name = "SolFed M6C 12.7mm \"SOCOM\""
 	build_path = /obj/item/gun/projectile/lamia/socom
 
 /datum/design/autolathe/gun/mateba
-	name = "Seinemetall Defense GmbH HG 12mm \"Mateba\" autorevolver"
+	name = "Seinemetall Defense GmbH HG 12.7mm \"Mateba\" autorevolver"
 	build_path = /obj/item/gun/projectile/revolver/rev10/mateba
 
 /datum/design/autolathe/gun/amnesty
-	name = "NM 12mm Amnesty"
+	name = "NM 12.7mm Amnesty"
 	build_path = /obj/item/gun/projectile/lamia/amnesty
 
 /datum/design/autolathe/gun/rebar
-	name = "GP 12mm Rebar"
+	name = "GP 12.7mm Rebar"
 	build_path = /obj/item/gun/projectile/rebar
 
 /// S M G S
@@ -302,7 +302,7 @@
 	build_path = /obj/item/gun/projectile/revolver/judge
 
 /datum/design/autolathe/gun/trouble_shooter
-	name = "GP 7.62x39mm \"Trouble Shooter\""
+	name = "GP 7.62x39mm \"Troubleshooter\""
 	build_path = /obj/item/gun/projectile/trouble_shooter
 
 // . 4 0 8 H E A V Y  R I F L E S
@@ -354,7 +354,7 @@
 
 /datum/design/autolathe/gun/survivalrifle
 	name = "Hunters Inc 10mm Caseless \"Bond\" Rifle"
-	build_path = /obj/item/gun/projectile/automatic/survivalrifle
+	build_path = /obj/item/gun/projectile/boltgun/survivalrifle
 
 /datum/design/autolathe/gun/flare_gun
 	name = "H&S \"Dazzlation\" flare pistol"
@@ -403,7 +403,7 @@
 /datum/design/autolathe/gun/energygun_martin
 	name = "H&S PDW E \"Martin\""
 	build_path = /obj/item/gun/energy/gun/martin
-	
+
 /datum/design/autolathe/gun/ntpistol
 	name = "NT LP \"Serenity\""
 	build_path = /obj/item/gun/energy/ntpistol

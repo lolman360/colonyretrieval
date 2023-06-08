@@ -92,7 +92,7 @@
 	switched_on_qualities = list(QUALITY_HAMMERING = 60)
 	switched_off_qualities = list(QUALITY_HAMMERING = 35)
 	toggleable = TRUE
-	degradation = 2
+	degradation = 0.6
 	use_power_cost = 1.5
 	workspeed = 1.5
 	max_upgrades = 2
@@ -212,6 +212,7 @@
 	wielded_icon = "chargehammer1"
 	item_state = "chargehammer0"
 	w_class = ITEM_SIZE_HUGE
+	force = WEAPON_FORCE_DANGEROUS
 	switched_on_forcemult = 2.2
 	armor_penetration = ARMOR_PEN_EXTREME // Retains AP when turned off - it's a hammer.
 	structure_damage_factor = STRUCTURE_DAMAGE_BREACHING

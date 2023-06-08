@@ -582,6 +582,7 @@ For the sake of consistency, I suggest always rounding up on even values when ap
 	if(silenced)
 		//Silenced shots have a lower range and volume
 		playsound(user, fire_sound_silenced, 15, 1, -3)
+		to_chat(user, SPAN_WARNING("You fire \the [src]!"))
 	else
 		playsound(user, fire_sound, 60, 1)
 
@@ -993,6 +994,7 @@ For the sake of consistency, I suggest always rounding up on even values when ap
 	.=..()
 	update_firemode()
 
+
 /obj/item/gun/dropped(mob/user)
 	// I really fucking hate this but this is how this is going to work.
 	var/mob/living/carbon/human/H = user
@@ -1000,6 +1002,11 @@ For the sake of consistency, I suggest always rounding up on even values when ap
 		toggle_scope(H)
 	update_firemode(FALSE)
 	.=..()
+
+/obj/item/gun/forceMove()
+	. = ..()
+	if(.)
+		update_firemode(FALSE)
 
 /obj/item/gun/swapped_from()
 	.=..()

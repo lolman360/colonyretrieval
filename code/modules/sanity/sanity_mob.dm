@@ -373,7 +373,6 @@ GLOBAL_VAR_INIT(GLOBAL_INSIGHT_MOD, 1)
 				resting = 0
 
 				LEGACY_SEND_SIGNAL(O, COMSIG_ODDITY_USED)
-				owner.give_health_via_stats()
 				for(var/mob/living/carbon/human/H in viewers(owner))
 					LEGACY_SEND_SIGNAL(H, COMSIG_HUMAN_ODDITY_LEVEL_UP, owner, O)
 
@@ -388,10 +387,9 @@ GLOBAL_VAR_INIT(GLOBAL_INSIGHT_MOD, 1)
 
 			var/stat_pool = resting * 15
 			resting = 0
-			owner.give_health_via_stats()
 			while(stat_pool > 0)
 				stat_pool--
-				LAZYAPLUS(stat_change, pick(ALL_STATS_FOR_LEVEL_UP), 3)
+				LAZYAPLUS(stat_change, pick(ALL_STATS), 3)
 
 			for(var/stat in stat_change)
 				if((owner.stats.getStat(stat)) >= STAT_VALUE_MAXIMUM)

@@ -469,7 +469,7 @@
 	// Were we able to breathe?
 	var/failed_breath = failed_inhale || failed_exhale
 	if (!failed_breath)
-		adjustOxyLoss(-5)
+		adjustOxyLoss(-1)
 
 	handle_temperature_effects(breath)
 
@@ -768,8 +768,11 @@
 
 		var/total_plasmaloss = 0
 		for(var/obj/item/I in src)
+			if(!I.is_worn())
+				return
 			if(I.contaminated)
 				total_plasmaloss += vsc.plc.CONTAMINATION_LOSS
+				
 		if(!(status_flags & GODMODE))
 			bloodstr.add_reagent("plasma", total_plasmaloss)
 

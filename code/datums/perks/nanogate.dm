@@ -20,14 +20,6 @@
 	longer stretches at a faster pace without tiring. Though you feel that all this strain might make your slightly weaker to physical trauma."
 	gain_text = "You feel a dull ache as your nanogate releases newly configured nanites into your body."
 
-/datum/perk/nanite_muscle/assign(mob/living/carbon/human/H)
-	..()
-	holder.brute_mod_perk += 0.10
-
-/datum/perk/nanite_muscle/remove()
-	holder.brute_mod_perk -= 0.10
-	..()
-
 /datum/perk/nanite_armor
 	name = "Nanite Skin-Weave"
 	desc = "Through the use of reactive nanites designed to plate together into a shield your machines can reform at a lightning pace to let you physically resist incoming damage by forming a \
@@ -36,12 +28,14 @@
 
 /datum/perk/nanite_armor/assign(mob/living/carbon/human/H)
 	..()
-	holder.maxHealth += 40
-	holder.health += 40
+	holder.brute_mod_perk -= 0.2 // One third of subdermal armor
+	holder.mob_bomb_defense += 5
+	holder.falls_mod -= 0.2
 
 /datum/perk/nanite_armor/remove()
-	holder.maxHealth -= 40
-	holder.health -= 40
+	holder.brute_mod_perk += 0.20
+	holder.mob_bomb_defense -= 5
+	holder.falls_mod += 0.2
 	..()
 
 /datum/perk/nanite_metal_drinker
@@ -100,11 +94,11 @@
 /datum/perk/nanite_ammo
 	name = "Munition Fabrication"
 	desc = "You programmed and set aside a specific subset of nanites whose singular purpose is to reconstruct themselves into ammunition boxes. The process is quite intensive and requires \
-	half an hour between uses."
+	15 minutes between uses."
 	gain_text = "You feel a dull ache as your nanogate releases newly configured nanites into your body."
 	active = FALSE
 	passivePerk = FALSE
-	var/cooldown = 30 MINUTES
+	var/cooldown = 15 MINUTES
 	var/anti_cheat = FALSE //No more spaming...
 
 /datum/perk/nanite_ammo/activate()
@@ -142,7 +136,7 @@
 						/obj/item/ammo_magazine/ammobox/kurtz_50/laser,
 						/obj/item/ammo_magazine/ammobox/antim, //Unlike the small box holds 15
 						/obj/item/ammo_magazine/ammobox/antim/scrap,
-//						/obj/item/ammo_magazine/ammobox/ball,
+						/obj/item/ammo_magazine/ammobox/ball,
 						/obj/item/ammo_magazine/ammobox/heavy_rifle_408_small/laser,
 						/obj/item/ammo_magazine/ammobox/heavy_rifle_408_small/hv,
 						/obj/item/ammo_magazine/ammobox/heavy_rifle_408_small/scrap,

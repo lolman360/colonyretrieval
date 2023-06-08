@@ -161,12 +161,12 @@
 			to_chat(src, SPAN_WARNING("You feel extremely [pick("dizzy","woosey","faint")]"))
 	else if(blood_volume < blood_bad)
 		eye_blurry = max(eye_blurry,6)
-		adjustOxyLoss(2)
+		adjustOxyLoss(3)
 		if(prob(15))
 			to_chat(src, SPAN_WARNING("You feel very [pick("dizzy","woosey","faint")]"))
 	else if(blood_volume < blood_okay)
 		eye_blurry = max(eye_blurry,6)
-		adjustOxyLoss(1.5)
+		adjustOxyLoss(2.5)
 		if(prob(15))
 			Weaken(rand(1,3))
 			to_chat(src, SPAN_WARNING("You feel very [pick("dizzy","woosey","faint")]"))
@@ -174,7 +174,7 @@
 		if(prob(1))
 			to_chat(src, SPAN_WARNING("You feel [pick("dizzy","woosey","faint")]"))
 		if(getOxyLoss() < 10)
-			adjustOxyLoss(1)
+			adjustOxyLoss(2)
 
 	// Blood loss or heart damage make you lose nutriments
 	if(blood_volume < blood_safe || heart_efficiency < BRUISED_2_EFFICIENCY)

@@ -258,22 +258,23 @@
 /obj/item/clothing/glasses/crayon_blindfold/proc/update_blindfold(mob/living/carbon/human/user)
 	if(istype(user))
 		if(user.glasses == src && !sight_modifier)
-			for(var/datum/language/L in user.languages) // Give bonuses only to cultists that are nearsighted/blinded
-				if((L.name == LANGUAGE_CULT || L.name == LANGUAGE_OCCULT) && (user.disabilities&NEARSIGHTED || user.disabilities&BLIND))
-					user.additional_darksight += 1
+			for(var/datum/language/L in user.languages) // Give bonuses only to cultists 
+				if((L.name == LANGUAGE_CULT || L.name == LANGUAGE_OCCULT))
+					see_invisible = SEE_INVISIBLE_NOLIGHTING
 					prescription = 1
 					darkness_view = 7
 					tint = TINT_NONE
 					sight_modifier = TRUE
 					sight_bonus = TRUE
 				else
+					see_invisible = -1
 					prescription = 0
 					darkness_view = 0
 					tint = TINT_BLIND
 					sight_modifier = TRUE
 					sight_bonus = TRUE
 		if(sight_bonus && !(user.glasses == src)) // We back to our initial stats in case it gets picked up by noncultists
-			user.additional_darksight -= 1
+			see_invisible = -1
 			prescription = 0
 			darkness_view = 0
 			tint = TINT_BLIND
