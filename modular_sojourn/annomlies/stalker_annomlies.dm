@@ -4,7 +4,6 @@
 	sad."
 	icon = 'modular_sojourn/annomlies/stalker_annomlies.dmi'
 	var/active = FALSE
-	var/activated_since_last_artifactcheck = FALSE
 	var/last_activation
 	var/cooldown
 	pixel_x = 8
