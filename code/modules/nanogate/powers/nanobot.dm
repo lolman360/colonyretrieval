@@ -35,6 +35,7 @@ List of powers in this page :
 			verbs += /obj/item/organ/internal/nanogate/proc/stand_damage
 			verbs += /obj/item/organ/internal/nanogate/proc/stand_health
 			verbs += /obj/item/organ/internal/nanogate/proc/stand_armor
+			verbs += /obj/item/organ/internal/nanogate/proc/stand_gun
 			verbs += /obj/item/organ/internal/nanogate/proc/stand_repair
 			verbs += /obj/item/organ/internal/nanogate/proc/autodoc_mode
 			verbs += /obj/item/organ/internal/nanogate/proc/radio_mode
@@ -45,6 +46,7 @@ List of powers in this page :
 			owner_verbs += /obj/item/organ/internal/nanogate/proc/stand_damage
 			owner_verbs += /obj/item/organ/internal/nanogate/proc/stand_health
 			owner_verbs += /obj/item/organ/internal/nanogate/proc/stand_armor
+			owner_verbs += /obj/item/organ/internal/nanogate/proc/stand_gun
 			owner_verbs += /obj/item/organ/internal/nanogate/proc/stand_repair
 			owner_verbs += /obj/item/organ/internal/nanogate/proc/autodoc_mode
 			owner_verbs += /obj/item/organ/internal/nanogate/proc/radio_mode
@@ -64,7 +66,7 @@ List of powers in this page :
 /obj/item/organ/internal/nanogate/proc/stand_damage()
 	set category = "Nanogate Robot"
 	set name = "Upgrade Nanobot - Damage (1)"
-	set desc = "Spend some of your nanites to upgrade your nanobot with greater offensive power."
+	set desc = "Spend some of your nanites to upgrade your nanobot with greater offensive power. Also improves its gun, if it has one."
 	nano_point_cost = 1
 	var/damage_boost = 20 // How much bonus damage does the nanobot get?
 
@@ -73,6 +75,7 @@ List of powers in this page :
 			to_chat(owner, "You permanently assign some of your nanites to boost your nanobot's damage output.")
 			Stand.melee_damage_lower += damage_boost
 			Stand.melee_damage_upper += damage_boost
+			Stand.projectiletype = /obj/item/projectile/bullet/kurtz_50
 			verbs -= /obj/item/organ/internal/nanogate/proc/stand_damage
 	else
 		to_chat(owner, "You do not have a nanobot to upgrade!")
@@ -107,6 +110,21 @@ List of powers in this page :
 			to_chat(owner, "You permanently assign some of your nanites to reinforce your nanobot's armor.")
 			Stand.armor = armor_boost
 			verbs -= /obj/item/organ/internal/nanogate/proc/stand_armor
+	else
+		to_chat(owner, "You do not have a nanobot to upgrade!")
+
+// Behold, my stand NANOBOT. It wields a GUN.
+/obj/item/organ/internal/nanogate/proc/stand_gun()
+	set category = "Nanogate Robot"
+	set name = "Upgrade Nanobot - Gun (1)"
+	set desc = "Spend some of your nanites to upgrade your nanobot to have a gun."
+	nano_point_cost = 1
+
+	if(Stand) // Do they have the bot?
+		if(pay_power_cost(nano_point_cost))
+			to_chat(owner, "You permanently assign some of your nanites to create a gun.")
+			Stand.ranged = TRUE
+			verbs -= /obj/item/organ/internal/nanogate/proc/stand_gun
 	else
 		to_chat(owner, "You do not have a nanobot to upgrade!")
 

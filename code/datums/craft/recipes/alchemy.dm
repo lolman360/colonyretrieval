@@ -59,7 +59,7 @@
 	name = "Throwing Flask"
 	result = /obj/item/reagent_containers/food/drinks/bottle/alchemy
 	steps = list(
-		list(/obj/item/stack/ore/glass, 5), // One per unit, offensive bottles, hard to get
+		list(/obj/item/stack/ore/glass, 2), // One per unit, offensive bottles, hard to get
 		list(QUALITY_HEATING, 5, 60)
 	)
 

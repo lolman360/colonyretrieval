@@ -45,6 +45,7 @@
 	colony_friend = TRUE
 	friendly_to_colony = TRUE
 
+	projectiletype = /obj/item/projectile/bullet/magnum_40
 	known_languages = list(LANGUAGE_COMMON)
 
 	follow_message = "states, \"Beginning Escort Protocol.\""

@@ -180,7 +180,7 @@
 				var/message = pick("I will gather.", "Time for harvesting.", "This one is ready.")
 				say(message)
 				attacking = 1
-				if(do_after(src, 30, A))
+				if(do_after(src, 5, A))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
 					T.attack_hand(src)
 			if(FARMBOT_WATER)
@@ -191,7 +191,7 @@
 				var/message = pick("Waters of life.", "Giving this one water.")
 				say(message)
 				attacking = 1
-				if(do_after(src, 30, A))
+				if(do_after(src, 5, A))
 					playsound(loc, 'sound/effects/slosh.ogg', 10, 1)
 					visible_message(SPAN_NOTICE("[src] waters \the [A]."))
 					playsound(loc, "robot_talk_heavy", 10, 0, 0)
@@ -204,7 +204,7 @@
 				var/message = pick("I will purge this.", "This plant is dead, removing now.")
 				say(message)
 				attacking = 1
-				if(do_after(src, 30, A))
+				if(do_after(src, 5, A))
 					visible_message(SPAN_NOTICE("[src] uproots the weeds in \the [A]."))
 					playsound(loc, "robot_talk_heavy", 10, 0, 0)
 					T.weedlevel = 0
@@ -216,7 +216,7 @@
 				var/message = pick("Replacing fertilizer.", "Restoring the mulch here.")
 				say(message)
 				attacking = 1
-				if(do_after(src, 30, A))
+				if(do_after(src, 5, A))
 					visible_message(SPAN_NOTICE("[src] waters \the [A]."))
 					playsound(loc, "robot_talk_heavy", 10, 0, 0)
 					T.reagents.add_reagent("ammonia", 10)
@@ -233,7 +233,7 @@
 		playsound(loc, "robot_talk_heavy", 10, 0, 0)
 		attacking = 1
 		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
-			tank.reagents.add_reagent("water", 10)
+			tank.reagents.add_reagent("water", 50)
 			if(prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 10, 1)
 		attacking = 0
