@@ -1,308 +1,558 @@
-var/global/list/plant_seed_sprites = list()
+// ********************************************************
+// Here's all the seeds (plants) that can be used in hydro
+// ********************************************************
 
-//Seed packet object/procs.
 /obj/item/seeds
-	name = "packet of seeds"
-	icon = 'icons/obj/seeds.dmi'
-	icon_state = "blank"
-	w_class = ITEM_SIZE_SMALL
+	icon = 'icons/obj/hydroponics/seeds.dmi'
+	icon_state = "seed"				// Unknown plant seed - these shouldn't exist in-game.
+	w_class = WEIGHT_CLASS_TINY
+	resistance_flags = FLAMMABLE
+	var/plantname = "Plants"		// Name of plant when planted.
+	var/obj/item/product						// A type path. The thing that is created when the plant is harvested.
+	var/productdesc
+	var/species = ""				// Used to update icons. Should match the name in the sprites unless all icon_* are overridden.
 
-	var/seed_type
-	var/datum/seed/seed
-	var/modified = 0
+	var/growing_icon = 'icons/obj/hydroponics/growing.dmi' //the file that stores the sprites of the growing plant from this seed.
+	var/icon_grow					// Used to override grow icon (default is "[species]-grow"). You can use one grow icon for multiple closely related plants with it.
+	var/icon_dead					// Used to override dead icon (default is "[species]-dead"). You can use one dead icon for multiple closely related plants with it.
+	var/icon_harvest				// Used to override harvest icon (default is "[species]-harvest"). If null, plant will use [icon_grow][growthstages].
 
-/obj/item/seeds/Initialize()
-	update_seed()
-	return ..()
+	var/lifespan = 25				// How long before the plant begins to take damage from age.
+	var/endurance = 15				// Amount of health the plant has.
+	var/maturation = 6				// Used to determine which sprite to switch to when growing.
+	var/production = 6				// Changes the amount of time needed for a plant to become harvestable.
+	var/yield = 3					// Amount of growns created per harvest. If is -1, the plant/shroom/weed is never meant to be harvested.
+	var/potency = 10				// The 'power' of a plant. Generally effects the amount of reagent in a plant, also used in other ways.
+	var/growthstages = 6			// Amount of growth sprites the plant has.
+	var/instability = 5             //Chance that a plant will mutate in each stage of it's life.
+	var/rarity = 0					// How rare the plant is. Used for giving points to cargo when shipping off to CentCom.
+	var/list/mutatelist = list()	// The type of plants that this plant can mutate into.
+	var/list/genes = list()			// Plant genes are stored here, see plant_genes.dm for more info.
+	var/list/forbiddengenes = list()
+	var/list/reagents_add = list()
+	// A list of reagents to add to product.
+	// Format: "reagent_id" = potency multiplier
+	// Stronger reagents must always come first to avoid being displaced by weaker ones.
+	// Total amount of any reagent in plant is calculated by formula: 1 + round(potency * multiplier)
 
-//Grabs the appropriate seed datum from the global list.
-/obj/item/seeds/proc/update_seed()
-	if(!seed && seed_type && !isnull(plant_controller.seeds) && plant_controller.seeds[seed_type])
-		seed = plant_controller.seeds[seed_type]
-	update_appearance()
+	var/weed_rate = 1 //If the chance below passes, then this many weeds sprout during growth
+	var/weed_chance = 5 //Percentage chance per tray update to grow weeds
+	var/seed_flags = MUTATE_EARLY //Determines if a plant is allowed to mutate early at 30+ instability
 
-//Updates strings and icon appropriately based on seed datum.
-/obj/item/seeds/proc/update_appearance()
-	if(!seed) return
+/obj/item/seeds/Initialize(mapload, nogenes = 0)
+	. = ..()
+	pixel_x = rand(-8, 8)
+	pixel_y = rand(-8, 8)
 
-	// Update icon.
-	cut_overlays()
-	var/is_seeds = ((seed.seed_noun in list("seeds","pits","nodes")) ? 1 : 0)
-	var/image/seed_mask
-	var/seed_base_key = "base-[is_seeds ? seed.get_trait(TRAIT_PLANT_COLOUR) : "spores"]"
-	if(plant_seed_sprites[seed_base_key])
-		seed_mask = plant_seed_sprites[seed_base_key]
-	else
-		seed_mask = image('icons/obj/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
-		if(is_seeds) // Spore glass bits aren't coloured.
-			seed_mask.color = seed.get_trait(TRAIT_PLANT_COLOUR)
-		plant_seed_sprites[seed_base_key] = seed_mask
+	if(!icon_grow)
+		icon_grow = "[species]-grow"
 
-	var/image/seed_overlay
-	var/seed_overlay_key = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
-	if(plant_seed_sprites[seed_overlay_key])
-		seed_overlay = plant_seed_sprites[seed_overlay_key]
-	else
-		seed_overlay = image('icons/obj/seeds.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]")
-		seed_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-		plant_seed_sprites[seed_overlay_key] = seed_overlay
+	if(!icon_dead)
+		icon_dead = "[species]-dead"
 
-	add_overlay(seed_mask)
-	add_overlay(seed_overlay)
+	if(!icon_harvest && !get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism) && yield != -1)
+		icon_harvest = "[species]-harvest"
 
-	if(is_seeds)
-		src.name = "packet of [seed.seed_name] [seed.seed_noun]"
-		src.desc = "It has a picture of [seed.display_name] on the front."
-	else
-		src.name = "sample of [seed.seed_name] [seed.seed_noun]"
-		src.desc = "It's labelled as coming from [seed.display_name]."
-	if (seed.origin_tech) origin_tech = seed.origin_tech.Copy()
+	if(!nogenes) // not used on Copy()
+		genes += new /datum/plant_gene/core/lifespan(lifespan)
+		genes += new /datum/plant_gene/core/endurance(endurance)
+		genes += new /datum/plant_gene/core/weed_rate(weed_rate)
+		genes += new /datum/plant_gene/core/weed_chance(weed_chance)
+		if(yield != -1)
+			genes += new /datum/plant_gene/core/yield(yield)
+			genes += new /datum/plant_gene/core/production(production)
+		if(potency != -1)
+			genes += new /datum/plant_gene/core/potency(potency)
+			genes += new /datum/plant_gene/core/instability(instability)
+
+		for(var/p in genes)
+			if(ispath(p))
+				genes -= p
+				genes += new p
+
+		for(var/reag_id in reagents_add)
+			genes += new /datum/plant_gene/reagent(reag_id, reagents_add[reag_id])
+		reagents_from_genes() //quality coding
 
 /obj/item/seeds/examine(mob/user)
-	..(user)
-	if(seed && !seed.roundstart)
-		to_chat(user, "It's tagged as variety #[seed.uid].")
-
-/obj/item/seeds/cutting
-	name = "cuttings"
-	desc = "Some plant cuttings."
-
-/obj/item/seeds/cutting/update_appearance()
-	..()
-	src.name = "packet of [seed.seed_name] cuttings"
-
-/obj/item/seeds/random
-	seed_type = null
-
-/obj/item/seeds/random/New()
-	..()
-	seed = plant_controller.create_random_seed()
-	seed_type = seed.name
-	update_seed()
-
-/obj/item/seeds/chiliseed
-	seed_type = "chili"
-
-/obj/item/seeds/plastiseed
-	seed_type = "plastic"
-
-/obj/item/seeds/grapeseed
-	seed_type = "grapes"
-
-/obj/item/seeds/greengrapeseed
-	seed_type = "greengrapes"
-
-/obj/item/seeds/peanutseed
-	seed_type = "peanut"
-
-/obj/item/seeds/cabbageseed
-	seed_type = "cabbage"
-
-/obj/item/seeds/shandseed
-	seed_type = "shand"
-
-/obj/item/seeds/mtearseed
-	seed_type = "mtear"
-
-/obj/item/seeds/brootseed
-	seed_type = "broot"
-
-/obj/item/seeds/berryseed
-	seed_type = "berries"
-
-/obj/item/seeds/glowberryseed
-	seed_type = "glowberries"
-
-/obj/item/seeds/bananaseed
-	seed_type = "banana"
-
-/obj/item/seeds/clownanaseed
-	seed_type = "clownana"
-
-/obj/item/seeds/eggplantseed
-	seed_type = "eggplant"
-
-/obj/item/seeds/bloodtomatoseed
-	seed_type = "bloodtomato"
-
-/obj/item/seeds/tomatoseed
-	seed_type = "tomato"
-
-/obj/item/seeds/killertomatoseed
-	seed_type = "killertomato"
-
-/obj/item/seeds/bluetomatoseed
-	seed_type = "bluetomato"
-
-/obj/item/seeds/bluespacetomatoseed
-	seed_type = "bluespacetomato"
-	price_tag = 180
-
-/obj/item/seeds/bluespacetomatoseed/New()
-	..()
-	item_flags |= BLUESPACE
-
-/obj/item/seeds/cornseed
-	seed_type = "corn"
-
-/obj/item/seeds/poppyseed
-	seed_type = "poppies"
-
-/obj/item/seeds/potatoseed
-	seed_type = "potato"
-
-/obj/item/seeds/icepepperseed
-	seed_type = "icechili"
-
-/obj/item/seeds/soyaseed
-	seed_type = "soybean"
-
-/obj/item/seeds/wheatseed
-	seed_type = "wheat"
-
-/obj/item/seeds/riceseed
-	seed_type = "rice"
-
-/obj/item/seeds/carrotseed
-	seed_type = "carrot"
-
-/obj/item/seeds/reishimycelium
-	seed_type = "reishi"
-
-/obj/item/seeds/amanitamycelium
-	seed_type = "amanita"
-
-/obj/item/seeds/angelmycelium
-	seed_type = "destroyingangel"
-
-/obj/item/seeds/libertymycelium
-	seed_type = "libertycap"
-
-/obj/item/seeds/chantermycelium
-	seed_type = "mushrooms"
-
-/obj/item/seeds/towermycelium
-	seed_type = "towercap"
-
-/obj/item/seeds/glowshroom
-	seed_type = "glowshroom"
-
-/obj/item/seeds/maintshroom
-	seed_type = "fungoartiglieria"
-
-/obj/item/seeds/plumpmycelium
-	seed_type = "plumphelmet"
-
-/obj/item/seeds/walkingmushroommycelium
-	seed_type = "walkingmushroom"
-
-/obj/item/seeds/nettleseed
-	seed_type = "nettle"
-
-/obj/item/seeds/deathnettleseed
-	seed_type = "deathnettle"
-
-/obj/item/seeds/weeds
-	seed_type = "weeds"
-
-/obj/item/seeds/harebell
-	seed_type = "harebells"
-
-/obj/item/seeds/sunflowerseed
-	seed_type = "sunflowers"
-
-/obj/item/seeds/brownmold
-	seed_type = "mold"
-
-/obj/item/seeds/appleseed
-	seed_type = "apple"
-
-/obj/item/seeds/poisonedappleseed
-	seed_type = "poisonapple"
-
-/obj/item/seeds/goldappleseed
-	seed_type = "goldapple"
-
-/obj/item/seeds/ambrosiavulgarisseed
-	seed_type = "ambrosia"
-
-/obj/item/seeds/ambrosiadeusseed
-	seed_type = "ambrosiadeus"
-
-/obj/item/seeds/ambrosiarobusto
-	seed_type = "ambrosiarobusto"
-
-/obj/item/seeds/whitebeetseed
-	seed_type = "whitebeet"
-
-/obj/item/seeds/sugarcaneseed
-	seed_type = "sugarcane"
-
-/obj/item/seeds/watermelonseed
-	seed_type = "watermelon"
-
-/obj/item/seeds/pumpkinseed
-	seed_type = "pumpkin"
-
-/obj/item/seeds/limeseed
-	seed_type = "lime"
-
-/obj/item/seeds/lemonseed
-	seed_type = "lemon"
-
-/obj/item/seeds/orangeseed
-	seed_type = "orange"
-
-/obj/item/seeds/poisonberryseed
-	seed_type = "poisonberries"
-
-/obj/item/seeds/deathberryseed
-	seed_type = "deathberries"
-
-/obj/item/seeds/grassseed
-	seed_type = "grass"
-
-/obj/item/seeds/cocoapodseed
-	seed_type = "cocoa"
-
-/obj/item/seeds/cherryseed
-	seed_type = "cherry"
-
-/obj/item/seeds/kudzuseed
-	seed_type = "kudzu"
-
-/obj/item/seeds/jurlmah
-	seed_type = "jurlmah"
-
-/obj/item/seeds/amauri
-	seed_type = "amauri"
-
-/obj/item/seeds/gelthi
-	seed_type = "gelthi"
-
-/obj/item/seeds/vale
-	seed_type = "vale"
-
-/obj/item/seeds/surik
-	seed_type = "surik"
-
-/obj/item/seeds/telriis
-	seed_type = "telriis"
-
-/obj/item/seeds/thaadra
-	seed_type = "thaadra"
-
-/obj/item/seeds/blueberryseed
-	seed_type = "blueberries"
-
-/obj/item/seeds/strawberryseed
-	seed_type = "strawberries"
-
-/obj/item/seeds/pineappleseed
-	seed_type = "pineapple"
-
-/obj/item/seeds/cinnamonseed
-	seed_type = "cinnamon"
-
-/obj/item/seeds/mintseed
-	seed_type = "mint"
+	. = ..()
+	. += "<span class='notice'>Use a pen on it to rename it or change its description.</span>"
+	if(reagents_add && user.can_see_reagents())
+		. += "<span class='notice'>- Plant Reagents -</span>"
+		for(var/datum/plant_gene/reagent/G in genes)
+			. += "<span class='notice'>- [G.get_name()] -</span>"
+
+/obj/item/seeds/proc/Copy()
+	var/obj/item/seeds/S = new type(null, 1)
+	// Copy all the stats
+	S.lifespan = lifespan
+	S.endurance = endurance
+	S.maturation = maturation
+	S.production = production
+	S.yield = yield
+	S.potency = potency
+	S.weed_rate = weed_rate
+	S.instability = instability
+	S.weed_chance = weed_chance
+	S.name = name
+	S.plantname = plantname
+	S.desc = desc
+	S.productdesc = productdesc
+	S.genes = list()
+	for(var/g in genes)
+		var/datum/plant_gene/G = g
+		S.genes += G.Copy()
+	S.reagents_add = reagents_add.Copy() // Faster than grabbing the list from genes.
+	return S
+
+/obj/item/seeds/proc/is_gene_forbidden(typepath)
+	return (typepath in forbiddengenes)
+
+
+/obj/item/seeds/proc/get_gene(typepath)
+	return (locate(typepath) in genes)
+
+/obj/item/seeds/proc/reagents_from_genes()
+	reagents_add = list()
+	for(var/datum/plant_gene/reagent/R in genes)
+		reagents_add[R.reagent_id] = R.rate
+
+///This proc adds a mutability_flag to a gene
+/obj/item/seeds/proc/set_mutability(typepath, mutability)
+	var/datum/plant_gene/g = get_gene(typepath)
+	if(g)
+		g.mutability_flags |=  mutability
+
+///This proc removes a mutability_flag from a gene
+/obj/item/seeds/proc/unset_mutability(typepath, mutability)
+	var/datum/plant_gene/g = get_gene(typepath)
+	if(g)
+		g.mutability_flags &=  ~mutability
+
+/obj/item/seeds/proc/mutate(lifemut = 2, endmut = 5, productmut = 1, yieldmut = 2, potmut = 25, wrmut = 2, wcmut = 5, traitmut = 0, stabmut = 3)
+	adjust_lifespan(rand(-lifemut,lifemut))
+	adjust_endurance(rand(-endmut,endmut))
+	adjust_production(rand(-productmut,productmut))
+	adjust_yield(rand(-yieldmut,yieldmut))
+	adjust_potency(rand(-potmut,potmut))
+	adjust_instability(rand(-stabmut,stabmut))
+	adjust_weed_rate(rand(-wrmut, wrmut))
+	adjust_weed_chance(rand(-wcmut, wcmut))
+	if(prob(traitmut))
+		if(prob(50))
+			add_random_traits(1, 1)
+		else
+			add_random_reagents(1, 1)
+
+/obj/item/seeds/bullet_act(obj/item/projectile/Proj) //Works with the Somatoray to modify plant variables.
+	if(istype(Proj, /obj/item/projectile/energy/florayield))
+		var/rating = 1
+		if(istype(loc, /obj/machinery/hydroponics))
+			var/obj/machinery/hydroponics/H = loc
+			rating = H.rating
+
+		if(yield == 0)//Oh god don't divide by zero you'll doom us all.
+			adjust_yield(1 * rating)
+		else if(prob(1/(yield * yield) * 100))//This formula gives you diminishing returns based on yield. 100% with 1 yield, decreasing to 25%, 11%, 6, 4, 2...
+			adjust_yield(1 * rating)
+		return BULLET_ACT_HIT
+	else
+		return ..()
+
+
+// Harvest procs
+/obj/item/seeds/proc/getYield()
+	var/return_yield = yield
+
+	var/obj/machinery/hydroponics/parent = loc
+	if(istype(loc, /obj/machinery/hydroponics))
+		if(parent.yieldmod == 0)
+			return_yield = min(return_yield, 1)//1 if above zero, 0 otherwise
+		else
+			return_yield *= (parent.yieldmod)
+
+	return return_yield
+
+
+/obj/item/seeds/proc/harvest(mob/user)
+	///Reference to the tray/soil the seeds are planted in.
+	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	///Count used for creating the correct amount of results to the harvest.
+	var/t_amount = 0
+	///List of plants all harvested from the same batch.
+	var/list/result = list()
+	///Tile of the harvester to deposit the growables.
+	var/output_loc = parent.Adjacent(user) ? user.loc : parent.loc //needed for TK
+	///Name of the grown products.
+	var/product_name
+	///The Number of products produced by the plant, typically the yield.
+	var/product_count = getYield()
+
+	parent.investigate_log("manual harvest by [key_name(user)] of [getYield()] of [src], with seed traits [english_list(genes)] and reagents_add [english_list_assoc(reagents_add)] and potency [potency].", INVESTIGATE_BOTANY)
+
+	while(t_amount < product_count)
+		var/obj/item/reagent_containers/food/snacks/grown/t_prod
+		if(instability >= 30 && (seed_flags & MUTATE_EARLY) && LAZYLEN(mutatelist) && prob(instability/3))
+			var/obj/item/seeds/new_prod = pick(mutatelist)
+			t_prod = initial(new_prod.product)
+			if(!t_prod)
+				continue
+			t_prod = new t_prod(output_loc, src)
+			t_prod.seed = new new_prod
+			t_prod.seed.name = initial(new_prod.name)
+			t_prod.seed.desc = initial(new_prod.desc)
+			t_prod.seed.plantname = initial(new_prod.plantname)
+			t_prod.transform = initial(t_prod.transform)
+			t_prod.transform *= TRANSFORM_USING_VARIABLE(t_prod.seed.potency, 100) + 0.5
+			t_amount++
+			if(t_prod.seed)
+				//t_prod.seed = new new_prod
+				t_prod.seed.instability = round(instability * 0.5)
+			continue
+		else
+			t_prod = new product(output_loc, src)
+		if(parent.myseed.plantname != initial(parent.myseed.plantname))
+			t_prod.name = lowertext(parent.myseed.plantname)
+		if(productdesc)
+			t_prod.desc = productdesc
+		t_prod.seed.name = parent.myseed.name
+		t_prod.seed.desc = parent.myseed.desc
+		t_prod.seed.plantname = parent.myseed.plantname
+		result.Add(t_prod) // User gets a consumable
+		if(!t_prod)
+			return
+		t_amount++
+		product_name = parent.myseed.plantname
+	if(getYield() >= 1)
+		SSblackbox.record_feedback("tally", "food_harvested", getYield(), product_name)
+	parent.update_tray(user)
+
+	return result
+
+/obj/item/seeds/proc/harvest_userless()
+	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	var/t_amount = 0
+	var/list/result = list()
+	var/output_loc =  parent.loc
+	var/product_name
+	while(t_amount < getYield())
+		var/obj/item/reagent_containers/food/snacks/grown/t_prod = new product(output_loc, src)
+		if(parent.myseed.plantname != initial(parent.myseed.plantname))
+			t_prod.name = lowertext(parent.myseed.plantname)
+		if(productdesc)
+			t_prod.desc = productdesc
+		t_prod.seed.name = parent.myseed.name
+		t_prod.seed.desc = parent.myseed.desc
+		t_prod.seed.plantname = parent.myseed.plantname
+		result.Add(t_prod) // User gets a consumable
+		if(!t_prod)
+			return
+		t_amount++
+		product_name = parent.myseed.plantname
+	if(getYield() >= 1)
+		SSblackbox.record_feedback("tally", "food_harvested", getYield(), product_name)
+	parent.investigate_log("autmoatic harvest of [getYield()] of [src], with seed traits [english_list(genes)] and reagents_add [english_list(reagents_add)] and potency [potency].", INVESTIGATE_BOTANY)
+	parent.update_tray()
+	return result
+
+/obj/item/seeds/proc/prepare_result(var/obj/item/reagent_containers/food/snacks/grown/T)
+	if(!T.reagents)
+		CRASH("[T] has no reagents.")
+
+	for(var/rid in reagents_add)
+		var/amount = 1 + round(potency * reagents_add[rid], 1)
+
+		var/list/data = null
+		if(rid == "blood") // Hack to make blood in plants always O-
+			data = list("blood_type" = "O-")
+		if(rid == /datum/reagent/consumable/nutriment || rid == /datum/reagent/consumable/nutriment/vitamin)
+			// apple tastes of apple.
+			data = T.tastes
+
+		T.reagents.add_reagent(rid, amount, data)
+
+
+/// Setters procs ///
+/obj/item/seeds/proc/adjust_yield(adjustamt)
+	if(yield != -1) // Unharvestable shouldn't suddenly turn harvestable
+		yield = clamp(yield + adjustamt, 0, 10)
+
+		if(yield <= 0 && get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism))
+			yield = 1 // Mushrooms always have a minimum yield of 1.
+		var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/yield)
+		if(C)
+			C.value = yield
+
+/obj/item/seeds/proc/adjust_lifespan(adjustamt)
+	lifespan = clamp(lifespan + adjustamt, 10, 100)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/lifespan)
+	if(C)
+		C.value = lifespan
+
+/obj/item/seeds/proc/adjust_endurance(adjustamt)
+	endurance = clamp(endurance + adjustamt, 10, 100)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/endurance)
+	if(C)
+		C.value = endurance
+
+/obj/item/seeds/proc/adjust_production(adjustamt)
+	if(yield != -1)
+		production = clamp(production + adjustamt, 1, 10)
+		var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/production)
+		if(C)
+			C.value = production
+
+/obj/item/seeds/proc/adjust_instability(adjustamt)
+	if(instability == -1)
+		return
+	instability = clamp(instability + adjustamt, 0, 100)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/instability)
+	if(C)
+		C.value = instability
+
+/obj/item/seeds/proc/adjust_potency(adjustamt)
+	if(potency != -1)
+		potency = clamp(potency + adjustamt, 0, 100)
+		var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/potency)
+		if(C)
+			C.value = potency
+
+/obj/item/seeds/proc/adjust_weed_rate(adjustamt)
+	weed_rate = clamp(weed_rate + adjustamt, 0, 10)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/weed_rate)
+	if(C)
+		C.value = weed_rate
+
+/obj/item/seeds/proc/adjust_weed_chance(adjustamt)
+	weed_chance = clamp(weed_chance + adjustamt, 0, 67)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/weed_chance)
+	if(C)
+		C.value = weed_chance
+
+//Directly setting stats
+
+/obj/item/seeds/proc/set_yield(adjustamt)
+	if(yield != -1) // Unharvestable shouldn't suddenly turn harvestable
+		yield = clamp(adjustamt, 0, 10)
+
+		if(yield <= 0 && get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism))
+			yield = 1 // Mushrooms always have a minimum yield of 1.
+		var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/yield)
+		if(C)
+			C.value = yield
+
+/obj/item/seeds/proc/set_lifespan(adjustamt)
+	lifespan = clamp(adjustamt, 10, 100)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/lifespan)
+	if(C)
+		C.value = lifespan
+
+/obj/item/seeds/proc/set_endurance(adjustamt)
+	endurance = clamp(adjustamt, 10, 100)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/endurance)
+	if(C)
+		C.value = endurance
+
+/obj/item/seeds/proc/set_production(adjustamt)
+	if(yield != -1)
+		production = clamp(adjustamt, 1, 10)
+		var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/production)
+		if(C)
+			C.value = production
+
+/obj/item/seeds/proc/set_potency(adjustamt)
+	if(potency != -1)
+		potency = clamp(adjustamt, 0, 100)
+		var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/potency)
+		if(C)
+			C.value = potency
+
+/obj/item/seeds/proc/set_instability(adjustamt)
+	if(instability == -1)
+		return
+	instability = clamp(adjustamt, 0, 100)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/instability)
+	if(C)
+		C.value = instability
+
+/obj/item/seeds/proc/set_weed_rate(adjustamt)
+	weed_rate = clamp(adjustamt, 0, 10)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/weed_rate)
+	if(C)
+		C.value = weed_rate
+
+/obj/item/seeds/proc/set_weed_chance(adjustamt)
+	weed_chance = clamp(adjustamt, 0, 67)
+	var/datum/plant_gene/core/C = get_gene(/datum/plant_gene/core/weed_chance)
+	if(C)
+		C.value = weed_chance
+
+
+/obj/item/seeds/proc/get_analyzer_text()  //in case seeds have something special to tell to the analyzer
+	var/text = ""
+	if(!get_gene(/datum/plant_gene/trait/plant_type/weed_hardy) && !get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism) && !get_gene(/datum/plant_gene/trait/plant_type/alien_properties))
+		text += "- Plant type: Normal plant\n"
+	if(get_gene(/datum/plant_gene/trait/plant_type/weed_hardy))
+		text += "- Plant type: Weed. Can grow in nutrient-poor soil.\n"
+	if(get_gene(/datum/plant_gene/trait/plant_type/fungal_metabolism))
+		text += "- Plant type: Mushroom. Can grow in dry soil.\n"
+	if(get_gene(/datum/plant_gene/trait/plant_type/alien_properties))
+		text += "- Plant type: <span class='warning'>UNKNOWN</span> \n"
+	if(potency != -1)
+		text += "- Potency: [potency]\n"
+	if(yield != -1)
+		text += "- Yield: [yield]\n"
+	text += "- Maturation speed: [maturation]\n"
+	if(yield != -1)
+		text += "- Production speed: [production]\n"
+	text += "- Endurance: [endurance]\n"
+	text += "- Lifespan: [lifespan]\n"
+	text += "- Instability: [instability]\n"
+	text += "- Weed Growth Rate: [weed_rate]\n"
+	text += "- Weed Vulnerability: [weed_chance]\n"
+	if(rarity)
+		text += "- Species Discovery Value: [rarity]\n"
+	var/all_traits = ""
+	for(var/datum/plant_gene/trait/traits in genes)
+		if(istype(traits, /datum/plant_gene/trait/plant_type))
+			continue
+		all_traits += " [traits.get_name()]"
+	text += "- Plant Traits:[all_traits]\n"
+	text += "*---------*"
+	return text
+
+/obj/item/seeds/proc/on_chem_reaction(datum/reagents/S)  //in case seeds have some special interaction with special chems
+	return
+
+/obj/item/seeds/attackby(obj/item/O, mob/user, params)
+	if (istype(O, /obj/item/plant_analyzer))
+		to_chat(user, "<span class='info'>*---------*\n This is \a <span class='name'>[src]</span>.</span>")
+		var/text
+		var/obj/item/plant_analyzer/P_analyzer = O
+		if(P_analyzer.scan_mode == PLANT_SCANMODE_STATS)
+			text = get_analyzer_text()
+			if(text)
+				to_chat(user, "<span class='notice'>[text]</span>")
+		if(reagents_add && P_analyzer.scan_mode == PLANT_SCANMODE_CHEMICALS)
+			to_chat(user, "<span class='notice'>- Plant Reagents -</span>")
+			to_chat(user, "<span class='notice'>*---------*</span>")
+			for(var/datum/plant_gene/reagent/G in genes)
+				to_chat(user, "<span class='notice'>- [G.get_name()] -</span>")
+			to_chat(user, "<span class='notice'>*---------*</span>")
+
+
+		return
+
+	if(istype(O, /obj/item/pen))
+		var/choice = input("What would you like to change?") in list("Plant Name", "Seed Description", "Product Description", "Cancel")
+		if(!user.canUseTopic(src, BE_CLOSE))
+			return
+		switch(choice)
+			if("Plant Name")
+				var/newplantname = reject_bad_text(stripped_input(user, "Write a new plant name:", name, plantname))
+				if(!user.canUseTopic(src, BE_CLOSE))
+					return
+				if (length(newplantname) > 20)
+					to_chat(user, "That name is too long!")
+					return
+				if(!newplantname)
+					to_chat(user, "That name is invalid.")
+					return
+				else
+					name = "[lowertext(newplantname)]"
+					plantname = newplantname
+			if("Seed Description")
+				var/newdesc = stripped_input(user, "Write a new description:", name, desc)
+				if(!user.canUseTopic(src, BE_CLOSE))
+					return
+				if (length(newdesc) > 180)
+					to_chat(user, "That description is too long!")
+					return
+				if(!newdesc)
+					to_chat(user, "That description is invalid.")
+					return
+				else
+					desc = newdesc
+			if("Product Description")
+				if(product && !productdesc)
+					productdesc = initial(product.desc)
+				var/newproductdesc = stripped_input(user, "Write a new description:", name, productdesc)
+				if(!user.canUseTopic(src, BE_CLOSE))
+					return
+				if (length(newproductdesc) > 180)
+					to_chat(user, "That description is too long!")
+					return
+				if(!newproductdesc)
+					to_chat(user, "That description is invalid.")
+					return
+				else
+					productdesc = newproductdesc
+			else
+				return
+
+	..() // Fallthrough to item/attackby() so that bags can pick seeds up
+
+// Checks plants for broken tray icons. Use Advanced Proc Call to activate.
+// Maybe some day it would be used as unit test.
+/proc/check_plants_growth_stages_icons()
+	var/list/states = icon_states('icons/obj/hydroponics/growing.dmi')
+	states |= icon_states('icons/obj/hydroponics/growing_fruits.dmi')
+	states |= icon_states('icons/obj/hydroponics/growing_flowers.dmi')
+	states |= icon_states('icons/obj/hydroponics/growing_mushrooms.dmi')
+	states |= icon_states('icons/obj/hydroponics/growing_vegetables.dmi')
+	var/list/paths = typesof(/obj/item/seeds) - /obj/item/seeds - typesof(/obj/item/seeds/sample)
+
+	for(var/seedpath in paths)
+		var/obj/item/seeds/seed = new seedpath
+
+		for(var/i in 1 to seed.growthstages)
+			if("[seed.icon_grow][i]" in states)
+				continue
+			to_chat(world, "[seed.name] ([seed.type]) lacks the [seed.icon_grow][i] icon!")
+
+		if(!(seed.icon_dead in states))
+			to_chat(world, "[seed.name] ([seed.type]) lacks the [seed.icon_dead] icon!")
+
+		if(seed.icon_harvest) // mushrooms have no grown sprites, same for items with no product
+			if(!(seed.icon_harvest in states))
+				to_chat(world, "[seed.name] ([seed.type]) lacks the [seed.icon_harvest] icon!")
+
+/obj/item/seeds/proc/randomize_stats()
+	set_lifespan(rand(25, 60))
+	set_endurance(rand(15, 35))
+	set_production(rand(2, 10))
+	set_yield(rand(1, 10))
+	set_potency(rand(10, 35))
+	set_weed_rate(rand(1, 10))
+	set_weed_chance(rand(5, 100))
+	maturation = rand(6, 12)
+
+/obj/item/seeds/proc/add_random_reagents(lower = 0, upper = 2)
+	var/amount_random_reagents = rand(lower, upper)
+	for(var/i in 1 to amount_random_reagents)
+		var/random_amount = rand(4, 15) * 0.01 // this must be multiplied by 0.01, otherwise, it will not properly associate
+		var/datum/plant_gene/reagent/R = new(get_random_reagent_id(), random_amount)
+		if(R.can_add(src))
+			genes += R
+		else
+			qdel(R)
+	reagents_from_genes()
+
+/obj/item/seeds/proc/add_random_traits(lower = 0, upper = 2)
+	var/amount_random_traits = rand(lower, upper)
+	for(var/i in 1 to amount_random_traits)
+		var/random_trait = pick((subtypesof(/datum/plant_gene/trait)-typesof(/datum/plant_gene/trait/plant_type)))
+		var/datum/plant_gene/trait/T = new random_trait
+		if(T.can_add(src) && !is_gene_forbidden(random_trait))
+			genes += T
+		else
+			qdel(T)
+
+/obj/item/seeds/proc/add_random_plant_type(normal_plant_chance = 75)
+	if(prob(normal_plant_chance))
+		var/random_plant_type = pick(subtypesof(/datum/plant_gene/trait/plant_type))
+		var/datum/plant_gene/trait/plant_type/P = new random_plant_type
+		if(P.can_add(src))
+			genes += P
+		else
+			qdel(P)
