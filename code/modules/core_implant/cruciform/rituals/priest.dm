@@ -810,8 +810,6 @@
 				user.vessel.remove_reagent("blood",blood_cost)
 		to_chat(user, SPAN_NOTICE("You feel the air thrum with an inaudible vibration."))
 		playsound(user.loc, 'sound/machines/signal.ogg', 50, 1)
-		for(var/datum/seed/S in plants_around)
-			give_boost(S)
 		set_global_cooldown()
 		return TRUE
 	else

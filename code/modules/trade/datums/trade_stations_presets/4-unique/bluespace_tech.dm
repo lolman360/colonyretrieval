@@ -12,7 +12,7 @@
 			/obj/item/circuitboard/teleporter,
 			/obj/item/hand_tele,
 			/obj/item/tele_spear,
-			/obj/item/seeds/bluespacetomatoseed,
+			/obj/item/seeds/tomato/bluespace,
 			/obj/item/reagent_containers/glass/beaker/bluespace,
 			/obj/item/circuitboard/bssilk_hub,
 			/obj/item/circuitboard/bssilk_cons,

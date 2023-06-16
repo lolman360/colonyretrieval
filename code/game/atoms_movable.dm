@@ -107,7 +107,7 @@
 		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
 			for(var/atom/movable/AM in loc)
 				if(AM != src)
-					AM.Crossed(src)
+					AM.Crossed(src, loc)
 			if(is_new_area && is_destination_turf)
 				destination.loc.Entered(src, origin)
 
@@ -143,6 +143,12 @@
 			if(isliving(src))
 				var/mob/living/M = src
 				M.turf_collision(T, speed)
+	
+//oldloc = old location on atom, inserted when forceMove is called and ONLY when forceMove is called!
+/atom/movable/Crossed(atom/movable/AM, oldloc)
+	// SHOULD_CALL_PARENT(TRUE)
+	. = ..()
+	SEND_SIGNAL(src, COMSIG_MOVABLE_CROSSED, AM)
 
 //decided whether a movable atom being thrown can pass through the turf it is in.
 /atom/movable/proc/hit_check(var/speed)

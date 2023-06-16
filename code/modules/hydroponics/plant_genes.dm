@@ -360,7 +360,7 @@
 	if(isliving(target))
 		var/teleport_radius = max(round(G.seed.potency / 10), 1)
 		var/turf/T = get_turf(target)
-		new /obj/effect/decal/cleanable/molten_object(T) //Leave a pile of goo behind for dramatic effect...
+		new /obj/effect/decal/cleanable/molten_item(T) //Leave a pile of goo behind for dramatic effect...
 		do_teleport(target, T, teleport_radius, channel = TELEPORT_CHANNEL_BLUESPACE)
 
 /datum/plant_gene/trait/teleport/on_slip(obj/item/reagent_containers/food/snacks/grown/G, mob/living/carbon/C)
@@ -371,7 +371,7 @@
 	if(prob(50))
 		do_teleport(G, T, teleport_radius, channel = TELEPORT_CHANNEL_BLUESPACE)
 	else
-		new /obj/effect/decal/cleanable/molten_object(T) //Leave a pile of goo behind for dramatic effect...
+		new /obj/effect/decal/cleanable/molten_item(T) //Leave a pile of goo behind for dramatic effect...
 		qdel(G)
 
 /datum/plant_gene/trait/maxchem
@@ -398,7 +398,9 @@
 
 /datum/plant_gene/trait/battery/on_attackby(obj/item/reagent_containers/food/snacks/grown/G, obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/cable_coil))
-		if(I.use_tool(src, user, 0, 5, skill_gain_mult = TRIVIAL_USE_TOOL_MULT))
+		var/obj/item/stack/cable_coil/thecoil = I
+		if(thecoil.can_use(5))
+			thecoil.use(5)
 			to_chat(user, "<span class='notice'>You add some cable to [G] and slide it inside the battery encasing.</span>")
 			var/obj/item/stock_parts/cell/potato/pocell = new /obj/item/stock_parts/cell/potato(user.loc)
 			pocell.icon_state = G.icon_state
@@ -418,16 +420,6 @@
 			qdel(G)
 		else
 			to_chat(user, "<span class='warning'>You need five lengths of cable to make a [G] battery!</span>")
-
-/datum/plant_gene/trait/eyes
-	name = "Oculary Mimicry"
-	/// Our googly eyes appearance.
-	var/mutable_appearance/googly
-
-/datum/plant_gene/trait/eyes/on_new(obj/item/reagent_containers/food/snacks/grown/G, newloc)
-	googly = mutable_appearance('icons/obj/hydroponics/harvest.dmi', "eyes")
-	googly.appearance_flags = RESET_COLOR
-	G.add_overlay(googly)
 
 /datum/plant_gene/trait/stinging
 	name = "Hypodermic Prickles"

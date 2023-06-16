@@ -29,7 +29,7 @@
 	if(istype(O, /obj/item/reagent_containers/food/snacks/grown/))
 		var/obj/item/reagent_containers/food/snacks/grown/F = O
 		if(F.seed)
-			if(user && !user.temporarilyRemoveItemFromInventory(O)) //couldn't drop the item
+			if(user && !user.canUnEquip(O)) //couldn't drop the item
 				return
 			while(t_amount < t_max)
 				var/obj/item/seeds/t_prod = F.seed.Copy()
@@ -42,7 +42,7 @@
 	else if(istype(O, /obj/item/grown))
 		var/obj/item/grown/F = O
 		if(F.seed)
-			if(user && !user.temporarilyRemoveItemFromInventory(O))
+			if(user && !user.canUnEquip(O))
 				return
 			while(t_amount < t_max)
 				var/obj/item/seeds/t_prod = F.seed.Copy()
@@ -60,7 +60,7 @@
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "sextractor"
 	density = TRUE
-	circuit = /obj/item/circuitboard/machine/seed_extractor
+	circuit = /obj/item/circuitboard/seed_extractor
 	/// Associated list of seeds, they are all weak refs.  We check the len to see how many refs we have for each
 	// seed
 	var/list/piles = list()
@@ -114,7 +114,7 @@
 			to_chat(user, "<span class='notice'>You add [O] to [src.name].</span>")
 			updateUsrDialog()
 		return
-	else if(user.a_intent != INTENT_HARM)
+	else if(user.a_intent != I_HURT)
 		to_chat(user, "<span class='warning'>You can't extract any seeds from \the [O.name]!</span>")
 	else
 		return ..()

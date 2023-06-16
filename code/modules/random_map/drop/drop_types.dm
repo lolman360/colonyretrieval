@@ -66,7 +66,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/seeds/orange,
 		/obj/item/seeds/grass,
 		/obj/item/seeds/sunflower,
-		/obj/item/seeds/chantrelle,
+		/obj/item/seeds/chantr,
 		/obj/item/seeds/potato,
 		/obj/item/seeds/sugarcane)
 

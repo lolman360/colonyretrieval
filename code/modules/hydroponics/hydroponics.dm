@@ -4,7 +4,6 @@
 	icon_state = "hydrotray"
 	density = TRUE
 	pixel_y = 8
-	obj_flags = CAN_BE_HIT | UNIQUE_RENAME
 	circuit = /obj/item/circuitboard/machine/hydroponics
 	idle_power_usage = 0
 	var/waterlevel = 100	//The amount of water in the tray (max 100)
@@ -45,7 +44,6 @@
 /obj/machinery/hydroponics/constructable/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/simple_rotation, ROTATION_ALTCLICK | ROTATION_CLOCKWISE | ROTATION_COUNTERCLOCKWISE | ROTATION_VERBS, null, CALLBACK(src, .proc/can_be_rotated))
-	AddComponent(/datum/component/plumbing/simple_demand)
 
 /obj/machinery/hydroponics/constructable/proc/can_be_rotated(mob/user, rotation_type)
 	return !anchored
@@ -75,7 +73,7 @@
 	return ..()
 
 /obj/machinery/hydroponics/constructable/attackby(obj/item/I, mob/user, params)
-	if (user.a_intent != INTENT_HARM)
+	if (user.a_intent != I_HURT)
 		// handle opening the panel
 		if(default_deconstruction_screwdriver(user, icon_state, icon_state, I))
 			return
@@ -89,15 +87,13 @@
 		return ..()
 	if(istype(Proj , /obj/item/projectile/energy/floramut))
 		mutate()
-		return BULLET_ACT_HIT
 	else if(istype(Proj , /obj/item/projectile/energy/florayield))
 		return myseed.bullet_act(Proj)
-	else if(istype(Proj , /obj/item/projectile/energy/florarevolution))
+	else if(istype(Proj , /obj/item/projectile/energy/floraevolve))
 		if(myseed)
 			if(myseed.mutatelist.len > 0)
 				myseed.instability = (myseed.instability/2)
 		mutatespecie()
-		return BULLET_ACT_HIT
 	else
 		return ..()
 
@@ -760,3 +756,7 @@
 
 /obj/machinery/hydroponics/soil/CtrlClick(mob/user)
 	return //Dirt doesn't have electricity, last I checked.
+
+/obj/machinery/hydroponics/soil/invisible
+	icon = null
+	icon_state = null

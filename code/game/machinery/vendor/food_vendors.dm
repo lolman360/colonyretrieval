@@ -175,18 +175,18 @@
 
 	products = list(
 					/obj/item/seeds/ambrosiarobusto = 3,
-					/obj/item/seeds/appleseed = 3,
-					/obj/item/seeds/bananaseed = 3,
+					/obj/item/seeds/apple = 3,
+					/obj/item/seeds/banana = 3,
 					/obj/item/seeds/berry = 3,
 					/obj/item/seeds/blueberry = 3,
-					/obj/item/seeds/brootseed = 2,
-					/obj/item/seeds/cabbageseed = 3,
-					/obj/item/seeds/carrotseed = 3,
+					/obj/item/seeds/broot = 2,
+					/obj/item/seeds/cabbage = 3,
+					/obj/item/seeds/carrot = 3,
 					/obj/item/seeds/chanter = 3,
 					/obj/item/seeds/cherryseed = 3,
 					/obj/item/seeds/chili = 3,
-					/obj/item/seeds/cinnamonseed = 2,
-					/obj/item/seeds/cocoapodseed = 3,
+					/obj/item/seeds/cinnamon = 2,
+					/obj/item/seeds/cocoapod = 3,
 					/obj/item/seeds/corn = 3,
 					/obj/item/seeds/eggplant = 3,
 					/obj/item/seeds/grape = 3,
@@ -222,10 +222,6 @@
 					/obj/item/seeds/liberty = 2,
 					/obj/item/seeds/nettle = 2,
 					/obj/item/seeds/reishi = 2,
-					/obj/item/seeds/reishi = 2,
-					/obj/item/seeds/surik = 2,
-					/obj/item/seeds/telriis = 2,
-					/obj/item/seeds/vale = 2,
 					 )
 	auto_price = FALSE
 
