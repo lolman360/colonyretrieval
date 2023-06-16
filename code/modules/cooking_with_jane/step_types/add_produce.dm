@@ -1,7 +1,9 @@
-//A cooking step that involves using SPECIFICALLY Grown foods
+//produce is being reworked
+//and so this will have to as well...
+
 /datum/cooking_with_jane/recipe_step/add_produce
 	class=CWJ_ADD_PRODUCE
-	var/required_produce_type
+	/*var/required_produce_type
 	var/base_potency
 	var/reagent_skip = FALSE
 	var/inherited_quality_modifier
@@ -9,8 +11,6 @@
 	var/list/exclude_reagents = list()
 
 /datum/cooking_with_jane/recipe_step/add_produce/New(var/produce, var/datum/cooking_with_jane/recipe/our_recipe)
-	if(!plant_controller)
-		CRASH("/datum/cooking_with_jane/recipe_step/add_produce/New: Plant controller not initialized! Exiting.")
 	if(produce && plant_controller && plant_controller.seeds[produce])
 		desc = "Add \a [produce] into the recipe."
 		required_produce_type = produce
@@ -72,3 +72,4 @@
 		else
 			added_item.forceMove(container)
 	return CWJ_SUCCESS
+	*/

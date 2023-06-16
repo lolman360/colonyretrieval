@@ -4336,7 +4336,7 @@
 /turf/simulated/floor/tiled/dark/gray_platform,
 /area/nadezhda/rnd/outpostbotany)
 "lT" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/atmospherics/portables_connector,
@@ -4457,13 +4457,13 @@
 /turf/simulated/floor/tiled/steel,
 /area/nadezhda/rnd/outpostbotany)
 "mi" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/steel/techfloor_grid,
 /area/nadezhda/rnd/outpostbotany)
 "mj" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/light,

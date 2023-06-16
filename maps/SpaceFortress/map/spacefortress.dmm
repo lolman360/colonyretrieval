@@ -1816,7 +1816,7 @@
 /turf/simulated/floor/tiled/white/brown_perforated,
 /area/outpost/abandoned_fortress)
 "fE" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/steel/techfloor_grid,
@@ -3968,7 +3968,7 @@
 /turf/simulated/floor/tiled/white/violetcorener,
 /area/outpost/abandoned_fortress)
 "lM" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -4019,7 +4019,7 @@
 /turf/simulated/floor/tiled/white/violetcorener,
 /area/outpost/abandoned_fortress)
 "lU" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/effect/decal/cleanable/dirt,

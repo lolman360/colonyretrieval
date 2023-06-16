@@ -93,10 +93,10 @@
 			/obj/item/reagent_containers/syringe/drugs,
 			/obj/item/reagent_containers/pill/zoom,
 			/obj/item/reagent_containers/pill/happy,
-			/obj/item/seeds/ambrosiadeusseed,
-			/obj/item/seeds/ambrosiavulgarisseed,
-			/obj/item/reagent_containers/food/snacks/grown/ambrosiadeus = good_data("Ambrosiadeus", list(1, 3), 200),
-			/obj/item/reagent_containers/food/snacks/grown/ambrosiavulgaris = good_data("Ambrosiavulgaris", list(1, 3), 400)
+			/obj/item/seeds/ambrosia/deus,
+			/obj/item/seeds/ambrosia/vulgaris,
+			/obj/item/seeds/ambrosia/deus = good_data("Ambrosia Deus", list(1, 3), 200),
+			/obj/item/reagent_containers/food/snacks/grown/ambrosia/vulgaris = good_data("Ambrosia Vulgaris", list(1, 3), 400)
 
 		)
 	)

@@ -143,7 +143,7 @@
 				target = H
 				break
 		else
-			for(var/obj/machinery/portable_atmospherics/hydroponics/tray in view(7, src))
+			for(var/obj/machinery/hydroponics/tray in view(7, src))
 				var/trayNeed = process_tray(tray)
 				if(trayNeed && (trayNeed != FARMBOT_WATER || tank.reagents.total_volume >= 100))
 					target = tray
@@ -166,8 +166,8 @@
 	if(attacking)
 		return
 
-	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
-		var/obj/machinery/portable_atmospherics/hydroponics/T = A
+	if(istype(A, /obj/machinery/hydroponics))
+		var/obj/machinery/hydroponics/T = A
 		var/t = process_tray(T)
 		switch(t)
 			if(0)
@@ -285,7 +285,7 @@
 	qdel(src)
 	return
 
-/mob/living/bot/farmbot/proc/process_tray(var/obj/machinery/portable_atmospherics/hydroponics/tray)
+/mob/living/bot/farmbot/proc/process_tray(var/obj/machinery/hydroponics/tray)
 	if(!tray || !istype(tray))
 		return 0
 

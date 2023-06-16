@@ -3,7 +3,7 @@
 /turf/unsimulated/mineral,
 /area/nadezhda/outside/forest/hunting_lodge)
 "ab" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dark/plough,
 /area/nadezhda/outside/forest/hunting_lodge)
 "ac" = (
@@ -592,7 +592,7 @@
 /turf/simulated/floor/asteroid/dirt/dust,
 /area/nadezhda/outside/forest/hunting_lodge_dark)
 "cV" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /obj/structure/railing,
 /turf/simulated/floor/asteroid/dirt/dark/plough,
 /area/nadezhda/outside/forest/hunting_lodge)
@@ -704,7 +704,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/nadezhda/outside/forest/hunting_lodge_dark)
 "dx" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /obj/structure/railing,
 /obj/item/tool/scythe,
 /turf/simulated/floor/asteroid/dirt/dark/plough,
@@ -1713,7 +1713,7 @@
 /turf/simulated/floor/asteroid/dirt,
 /area/nadezhda/outside/forest/hunting_lodge)
 "jy" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /obj/structure/railing{
 	anchored = 1;
 	dir = 8;
@@ -2217,7 +2217,7 @@
 /turf/simulated/floor/wood,
 /area/nadezhda/outside/forest/hunting_lodge_dark)
 "qe" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /obj/structure/railing{
 	anchored = 1;
 	dir = 8;
@@ -4214,7 +4214,7 @@
 /turf/simulated/floor/tiled/cafe,
 /area/nadezhda/outside/forest/hunting_lodge_dark)
 "Tl" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /obj/structure/railing{
 	anchored = 1;
 	dir = 8;

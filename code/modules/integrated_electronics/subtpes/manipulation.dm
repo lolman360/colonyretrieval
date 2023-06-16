@@ -245,7 +245,7 @@
 		activate_pin(2)
 		return
 
-	var/obj/machinery/portable_atmospherics/hydroponics/TR = OM
+	var/obj/machinery/hydroponics/TR = OM
 	if(istype(TR))
 		switch(get_pin_data(IC_INPUT, 2))
 			if(0)

@@ -2677,7 +2677,7 @@
 /turf/simulated/floor/asteroid/grass/jungle,
 /area/nadezhda/outside/forest/river_forest_light)
 "Hi" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/outside/forest/river_forest_light)
 "Hl" = (

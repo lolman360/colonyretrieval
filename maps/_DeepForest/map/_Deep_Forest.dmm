@@ -5317,7 +5317,7 @@
 /turf/simulated/floor/tiled/white/panels,
 /area/nadezhda/dungeon/outside/prepper)
 "fUg" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -14648,7 +14648,7 @@
 /turf/simulated/floor/tiled/derelict/white_small_edges,
 /area/nadezhda/outside/one_star)
 "pIW" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/steel/techfloor_grid,

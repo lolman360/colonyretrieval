@@ -80,7 +80,7 @@
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/cruciform_upgrade/natures_blessing/Process()
-	for(var/obj/machinery/portable_atmospherics/hydroponics/tray in oviewers(5, wearer))
+	for(var/obj/machinery/hydroponics/tray in oviewers(5, wearer))
 		if(tray.seed && !tray.dead)
 			var/max_health = tray.seed.get_trait(TRAIT_ENDURANCE)
 			if(tray.health < max_health)

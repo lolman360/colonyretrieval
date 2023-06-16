@@ -115,7 +115,7 @@
 // Reagent genes store reagent ID and reagent ratio. Amount of reagent in the plant = 1 + (potency * rate)
 /datum/plant_gene/reagent
 	name = "Nutriment"
-	var/reagent_id = /datum/reagent/consumable/nutriment
+	var/reagent_id = "nutriment"
 	var/rate = 0.04
 
 /datum/plant_gene/reagent/get_name()
@@ -160,7 +160,7 @@
 		if(R.reagent_id == reagent_id)
 			return FALSE
 	return TRUE
-
+/*
 /datum/plant_gene/reagent/polypyr
 	name = "Polypyrylium Oligomers"
 	reagent_id = /datum/reagent/medicine/polypyr
@@ -170,7 +170,7 @@
 	name = "Liquid Electricity"
 	reagent_id = /datum/reagent/consumable/liquidelectricity
 	rate = 0.1
-
+*/
 // Various traits affecting the product. Each must be somehow useful.
 /datum/plant_gene/trait
 	var/rate = 0.05
@@ -240,7 +240,7 @@
 	var/obj/item/seeds/seed = G.seed
 	var/stun_len = seed.potency * rate
 
-	if(!istype(G, /obj/item/grown/bananapeel) && (!G.reagents || !G.reagents.has_reagent(/datum/reagent/lube)))
+	if(!istype(G, /obj/item/grown/bananapeel) && (!G.reagents || !G.reagents.has_reagent("lube")))
 		stun_len /= 3
 
 	G.AddComponent(/datum/component/slippery, min(stun_len,140), NONE, CALLBACK(src, .proc/handle_slip, G))
@@ -260,19 +260,19 @@
 /datum/plant_gene/trait/cell_charge/on_slip(obj/item/reagent_containers/food/snacks/grown/G, mob/living/carbon/C)
 	var/power = G.seed.potency*rate
 	if(prob(power))
-		C.electrocute_act(round(power), G, 1, SHOCK_NOGLOVES)
+		C.electrocute_act(round(power)/50, G, 1, ran_zone())
 
 /datum/plant_gene/trait/cell_charge/on_squash(obj/item/reagent_containers/food/snacks/grown/G, atom/target)
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
 		var/power = G.seed.potency*rate
 		if(prob(power))
-			C.electrocute_act(round(power), G, 1, SHOCK_NOGLOVES)
+			C.electrocute_act(round(power)/50, G, 1, ran_zone())
 
 /datum/plant_gene/trait/cell_charge/on_consume(obj/item/reagent_containers/food/snacks/grown/G, mob/living/carbon/target)
 	if(!G.reagents.total_volume)
 		var/batteries_recharged = 0
-		for(var/obj/item/stock_parts/cell/C in target.GetAllContents())
+		for(var/obj/item/cell/C in target.GetAllContents())
 			var/newcharge = min(G.seed.potency*0.01*C.maxcharge, C.maxcharge)
 			if(C.charge < newcharge)
 				C.charge = newcharge

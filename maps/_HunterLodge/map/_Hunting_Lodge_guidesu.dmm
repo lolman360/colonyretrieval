@@ -3,7 +3,7 @@
 /turf/unsimulated/mineral,
 /area/nadezhda/outside/forest/hunting_lodge)
 "ab" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dark/plough,
 /area/nadezhda/outside/forest/hunting_lodge)
 "ac" = (
@@ -671,7 +671,7 @@
 /turf/simulated/floor/wood/wild1,
 /area/nadezhda/outside/forest/hunting_lodge_dark)
 "dB" = (
-/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/hydroponics,
 /turf/simulated/floor/wood/wild1,
 /area/nadezhda/outside/forest/hunting_lodge_dark)
 "dC" = (
@@ -1267,7 +1267,7 @@
 /turf/simulated/floor/wood/wild2,
 /area/nadezhda/outside/forest/hunting_lodge_dark)
 "gZ" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /obj/structure/railing{
 	desc = "A standard wood fence painted in copper color. Prevents live stock from stepping onto crops.";
 	dir = 8;
@@ -2468,7 +2468,7 @@
 /area/nadezhda/outside/forest/hunting_lodge)
 "Eo" = (
 /obj/landmark/join/start/lodge_hunter,
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dark/plough,
 /area/nadezhda/outside/forest/hunting_lodge)
 "Ez" = (

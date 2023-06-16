@@ -60,12 +60,12 @@
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "sextractor"
 	density = TRUE
-	circuit = /obj/item/circuitboard/seed_extractor
+	circuit = /obj/item/circuitboard/machine/seed_extractor
 	/// Associated list of seeds, they are all weak refs.  We check the len to see how many refs we have for each
 	// seed
 	var/list/piles = list()
 	var/max_seeds = 1000
-	var/seed_multiplier = 2
+	var/seed_multiplier = 1
 
 /obj/machinery/seed_extractor/RefreshParts()
 	for(var/obj/item/stock_parts/matter_bin/B in component_parts)
@@ -196,3 +196,4 @@
 					O.forceMove(drop_location())
 					. = TRUE
 					//to_chat(usr, "<span class='notice'>[src] clanks to life briefly before vending [prize.equipment_name]!</span>")
+

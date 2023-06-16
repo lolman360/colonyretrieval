@@ -13,7 +13,7 @@
 	var/global/list/valid_targets = list(
 		/obj/item/reagent_containers/food/snacks/grown,
 		/obj/item/grown,
-		/obj/machinery/portable_atmospherics/hydroponics,
+		/obj/machinery/hydroponics,
 		/obj/machinery/beehive,
 		/obj/item/seeds
 	)
@@ -77,9 +77,9 @@
 		grown_seed = S.seed
 		loaded_seed = grown_seed
 
-	else if(istype(target,/obj/machinery/portable_atmospherics/hydroponics))
+	else if(istype(target,/obj/machinery/hydroponics))
 
-		var/obj/machinery/portable_atmospherics/hydroponics/H = target
+		var/obj/machinery/hydroponics/H = target
 		if(H.frozen == 1)
 			to_chat(usr, "<span class='warning'>Disable the cryogenic freezing first!</span>")
 			return

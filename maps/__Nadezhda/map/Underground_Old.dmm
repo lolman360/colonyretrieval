@@ -15545,7 +15545,7 @@
 "aOm" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/ppflowers,
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /obj/item/device/lighting/toggleable/lantern,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
@@ -15580,7 +15580,7 @@
 "aOq" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/ppflowers,
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "aOr" = (
@@ -16636,8 +16636,8 @@
 /turf/simulated/floor/tiled/steel,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "aRi" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dark/plough,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "aRj" = (
@@ -16672,8 +16672,8 @@
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "aRq" = (
 /obj/structure/flora/small/trailrocka5,
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dark/plough,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "aRr" = (
@@ -16708,7 +16708,7 @@
 "aRw" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/item/device/lighting/toggleable/lantern,
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "aRx" = (
@@ -16977,7 +16977,7 @@
 /turf/simulated/floor/tiled/steel,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "aSh" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dark/plough,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "aSi" = (
@@ -20246,7 +20246,7 @@
 /turf/simulated/floor/tiled/techmaint_perforated,
 /area/nadezhda/maintenance/undergroundfloor1east)
 "bbc" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "bbd" = (
@@ -20344,7 +20344,7 @@
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "bbr" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -21159,7 +21159,7 @@
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "bdt" = (
 /obj/structure/flora/ausbushes/lavendergrass,
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/maintenance/undergroundfloor1oldgarden)
 "bdu" = (
@@ -22937,7 +22937,7 @@
 /turf/simulated/floor/tiled/white,
 /area/nadezhda/rnd/xenobiology/xenoflora)
 "bhs" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/atmospherics/portables_connector,
@@ -22950,14 +22950,14 @@
 /turf/simulated/floor/tiled/steel/techfloor_grid,
 /area/nadezhda/rnd/xenobiology/xenoflora)
 "bht" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/steel/techfloor_grid,
 /area/nadezhda/rnd/xenobiology/xenoflora)
 "bhu" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/atmospherics/portables_connector,
@@ -22970,14 +22970,14 @@
 /obj/effect/floor_decal/industrial/danger{
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/steel/techfloor_grid,
 /area/nadezhda/rnd/xenobiology/xenoflora)
 "bhw" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/light{
@@ -22986,7 +22986,7 @@
 /turf/simulated/floor/tiled/steel/techfloor_grid,
 /area/nadezhda/rnd/xenobiology/xenoflora)
 "bhx" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/steel/techfloor_grid,
@@ -23169,7 +23169,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/light{
@@ -23193,7 +23193,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/light{
@@ -26583,7 +26583,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/nadezhda/maintenance/undergroundfloor2south)
 "brk" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -37235,7 +37235,7 @@
 /area/nadezhda/hallway/side/f2section4)
 "bQy" = (
 /obj/structure/flora/ausbushes/lavendergrass,
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -43304,7 +43304,7 @@
 /turf/simulated/floor/plating,
 /area/nadezhda/maintenance/undergroundfloor2west)
 "cex" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
+/obj/machinery/hydroponics/soil/invisible,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/camera/network/cev_eris{
 	dir = 8
@@ -53072,7 +53072,7 @@
 /turf/simulated/floor/plating/under,
 /area/nadezhda/maintenance/undergroundfloor2west)
 "cAx" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/steel/techfloor_grid,
@@ -55144,7 +55144,7 @@
 	dir = 8;
 	pixel_x = -28
 	},
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/steel/techfloor_grid,
@@ -60497,7 +60497,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/nadezhda/maintenance/undergroundfloor2south)
 "cTo" = (
-/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/hydroponics,
 /obj/effect/decal/cleanable/cobweb2,
 /turf/simulated/floor/tiled/techmaint,
 /area/nadezhda/maintenance/undergroundfloor2south)
@@ -60870,7 +60870,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/nadezhda/maintenance/undergroundfloor2south)
 "cUj" = (
-/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/hydroponics,
 /turf/simulated/floor/tiled/techmaint,
 /area/nadezhda/maintenance/undergroundfloor2south)
 "cUl" = (
@@ -62923,7 +62923,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/nadezhda/maintenance/hideout)
 "cZa" = (
-/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/hydroponics,
 /turf/simulated/floor/tiled/techmaint,
 /area/nadezhda/maintenance/hideout)
 "cZb" = (
@@ -62935,7 +62935,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/nadezhda/maintenance/hideout)
 "cZc" = (
-/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/hydroponics,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -77388,7 +77388,7 @@
 /turf/simulated/floor/tiled/steel/violetcorener,
 /area/nadezhda/hallway/side/f2section1)
 "dFB" = (
-/obj/machinery/portable_atmospherics/hydroponics{
+/obj/machinery/hydroponics{
 	pixel_y = 4
 	},
 /obj/machinery/light,

@@ -230,7 +230,7 @@
 	power_draw_per_use = 10
 
 /obj/item/integrated_circuit/input/plant_scanner/do_work()
-	var/obj/machinery/portable_atmospherics/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/portable_atmospherics/hydroponics)
+	var/obj/machinery/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/hydroponics)
 	if(!istype(H)) //Invalid input
 		return
 	for(var/i=1, i<=outputs.len, i++)
@@ -298,7 +298,7 @@
 
 /obj/item/integrated_circuit/input/gene_scanner/do_work()
 	var/list/greagents = list()
-	var/obj/machinery/portable_atmospherics/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/portable_atmospherics/hydroponics)
+	var/obj/machinery/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/hydroponics)
 	if(!istype(H)) //Invalid input
 		return
 	for(var/i=1, i<=outputs.len, i++)

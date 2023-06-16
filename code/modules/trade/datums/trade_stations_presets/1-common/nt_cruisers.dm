@@ -55,7 +55,7 @@
 			/obj/item/tool/minihoe,
 			/obj/item/device/scanner/plant,
 			/obj/item/clothing/gloves/botanic_leather,
-			/obj/machinery/portable_atmospherics/hydroponics
+			/obj/machinery/hydroponics
 		),
 		"Custodial Supply" = list(
 			/obj/item/reagent_containers/glass/bucket,
@@ -123,27 +123,27 @@
 			/obj/item/reagent_containers/food/drinks/bottle/ntcahors/cargo
 		),
 		"Seeds and Exodic Seeds" = list(
-			/obj/item/seeds/chiliseed,
-			/obj/item/seeds/berryseed,
-			/obj/item/seeds/cornseed,
-			/obj/item/seeds/eggplantseed,
+			/obj/item/seeds/chili,
+			/obj/item/seeds/berry,
+			/obj/item/seeds/corn,
+			/obj/item/seeds/eggplant,
 			/obj/item/seeds/tomatoseed,
-			/obj/item/seeds/appleseed,
-			/obj/item/seeds/soyaseed,
-			/obj/item/seeds/wheatseed,
-			/obj/item/seeds/carrotseed,
-			/obj/item/seeds/harebell,
-			/obj/item/seeds/lemonseed,
-			/obj/item/seeds/orangeseed,
-			/obj/item/seeds/grassseed,
-			/obj/item/seeds/sunflowerseed,
-			/obj/item/seeds/chantermycelium,
-			/obj/item/seeds/potatoseed,
-			/obj/item/seeds/sugarcaneseed,
-			/obj/item/seeds/libertymycelium,
-			/obj/item/seeds/reishimycelium,
+			/obj/item/seeds/apple,
+			/obj/item/seeds/soya,
+			/obj/item/seeds/wheat,
+			/obj/item/seeds/carrot,
+			/obj/item/seeds/hare,
+			/obj/item/seeds/lemon,
+			/obj/item/seeds/orange,
+			/obj/item/seeds/grass,
+			/obj/item/seeds/sunflower,
+			/obj/item/seeds/chantrelle,
+			/obj/item/seeds/potato,
+			/obj/item/seeds/sugarcane,
+			/obj/item/seeds/liberty,
+			/obj/item/seeds/reishi,
 			/obj/item/seeds/random = good_data("Random Exodic Seed", list(-2, 1), 500),
-			/obj/item/seeds/kudzuseed
+			/obj/item/seeds/kudzu
 		)
 	)
 	offer_types = list(

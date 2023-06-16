@@ -26,7 +26,7 @@ var/datum/hivemind/hive_mind_ai
 											/obj/machinery/button,					/obj/machinery/status_display,
 											/obj/machinery/floor_light,				/obj/machinery/flasher,
 											/obj/machinery/filler_object,			/obj/machinery/hivemind_machine,
-											/obj/machinery/cryopod,					/obj/machinery/portable_atmospherics/hydroponics/soil,
+											/obj/machinery/cryopod,					/obj/machinery/hydroponics/soil,
 											/obj/machinery/portable_atmospherics/canister) //hivemind no longer can convert soil(its dirt) and canisters (its a metal cylinder with a valve))
 	//internals
 	var/list/global_abilities_cooldown = list()

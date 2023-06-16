@@ -341,9 +341,9 @@
 /area/outpost/abandoned_fortress)
 "kp" = (
 /obj/structure/table/marble,
-/obj/item/seeds/berryseed,
-/obj/item/seeds/berryseed,
-/obj/item/seeds/berryseed,
+/obj/item/seeds/berry,
+/obj/item/seeds/berry,
+/obj/item/seeds/berry,
 /obj/item/seeds/wheatseed,
 /obj/item/storage/bag/produce,
 /turf/simulated/floor/rock/manmade/ruin3,
@@ -665,7 +665,7 @@
 /turf/simulated/floor/rock/manmade/ruin3,
 /area/outpost/abandoned_fortress)
 "rz" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /obj/plant_spawner/wheat,
 /turf/simulated/floor/asteroid/dirt/flood/plough,
 /area/outpost/abandoned_fortress)
@@ -914,7 +914,7 @@
 /turf/simulated/floor/rock/manmade/ruin3,
 /area/outpost/abandoned_fortress)
 "AB" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /obj/plant_spawner/wheat,
 /obj/plant_spawner/wheat,
 /turf/simulated/floor/asteroid/dirt/flood/plough,
@@ -1757,9 +1757,9 @@
 /area/outpost/abandoned_fortress)
 "Zq" = (
 /obj/structure/table/marble,
-/obj/item/seeds/cornseed,
-/obj/item/seeds/cornseed,
-/obj/item/seeds/cornseed,
+/obj/item/seeds/corn,
+/obj/item/seeds/corn,
+/obj/item/seeds/corn,
 /obj/item/seeds/wheatseed,
 /turf/simulated/floor/rock/manmade/ruin3,
 /area/outpost/abandoned_fortress)

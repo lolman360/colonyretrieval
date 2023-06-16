@@ -1433,7 +1433,7 @@
 /turf/simulated/floor/asteroid/dirt/dust,
 /area/nadezhda/outside/forest/hunting_lodge)
 "eo" = (
-/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/machinery/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/flood/plough,
 /area/nadezhda/outside/forest/hunting_lodge)
 "ep" = (

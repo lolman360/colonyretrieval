@@ -100,23 +100,23 @@
 
 /datum/supply_pack/seeds
 	name = "Seeds Crate"
-	contains = list(/obj/item/seeds/chiliseed,
-					/obj/item/seeds/berryseed,
-					/obj/item/seeds/cornseed,
-					/obj/item/seeds/eggplantseed,
-					/obj/item/seeds/tomatoseed,
-					/obj/item/seeds/appleseed,
-					/obj/item/seeds/soyaseed,
-					/obj/item/seeds/wheatseed,
-					/obj/item/seeds/carrotseed,
-					/obj/item/seeds/harebell,
-					/obj/item/seeds/lemonseed,
-					/obj/item/seeds/orangeseed,
-					/obj/item/seeds/grassseed,
-					/obj/item/seeds/sunflowerseed,
-					/obj/item/seeds/chantermycelium,
-					/obj/item/seeds/potatoseed,
-					/obj/item/seeds/sugarcaneseed)
+	contains = list(/obj/item/seeds/chili,
+					/obj/item/seeds/berry,
+					/obj/item/seeds/corn,
+					/obj/item/seeds/eggplant,
+					/obj/item/seeds/tomato,
+					/obj/item/seeds/apple,
+					/obj/item/seeds/soya,
+					/obj/item/seeds/wheat,
+					/obj/item/seeds/carrot,
+					/obj/item/seeds/hare,
+					/obj/item/seeds/lemon,
+					/obj/item/seeds/orange,
+					/obj/item/seeds/grass,
+					/obj/item/seeds/sunflower,
+					/obj/item/seeds/chanter,
+					/obj/item/seeds/potato,
+					/obj/item/seeds/sugarcane)
 	cost = 100
 	containertype = /obj/structure/closet/crate/hydroponics
 	crate_name = "seeds crate"
@@ -152,7 +152,7 @@
 
 /datum/supply_pack/hydro_tray
 	name = "Hydroponics Tray Crate"
-	contains = list(/obj/machinery/portable_atmospherics/hydroponics)
+	contains = list(/obj/machinery/hydroponics)
 	cost = 340
 	containertype = /obj/structure/largecrate
 	crate_name = "hydroponics tray crate"

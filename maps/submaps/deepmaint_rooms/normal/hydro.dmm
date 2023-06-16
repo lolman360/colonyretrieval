@@ -22,11 +22,11 @@
 /turf/simulated/floor/asteroid/dirt,
 /area/deepmaint)
 "g" = (
-/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/hydroponics,
 /turf/simulated/floor/asteroid/dirt,
 /area/deepmaint)
 "h" = (
-/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/hydroponics,
 /turf/simulated/floor/asteroid/grass,
 /area/deepmaint)
 "i" = (

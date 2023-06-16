@@ -22,9 +22,6 @@ var/global/datum/global_init/init = new ()
 	initialize_mutation_recipes()
 
 
-	// Set up roundstart seed list.
-	plant_controller = new()
-
 	initialize_cooking_recipes()
 
 	qdel(src) //we're done

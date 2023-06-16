@@ -262,8 +262,8 @@
 /datum/reagent/toxin/plantbgone/touch_obj(obj/O, var/volume)
 	if(istype(O, /obj/effect/plant) && !istype(O, /obj/effect/plant/hivemind))
 		qdel(O)
-	if(istype(O, /obj/machinery/portable_atmospherics/hydroponics))
-		var/obj/machinery/portable_atmospherics/hydroponics/T = O
+	if(istype(O, /obj/machinery/hydroponics))
+		var/obj/machinery/hydroponics/T = O
 		T.seed = null
 		T.weedlevel = 0
 		T.pestlevel = 0

@@ -404,7 +404,7 @@ This proc will attempt to create a burrow against a wall, within view of the tar
 			continue
 
 		//We don't want maintshrooms to spread into places that are too bright
-		if (B.plant.type == /datum/seed/mushroom/maintshroom && T.get_lumcount() > 0.5)
+		if (T.get_lumcount() > 0.5)
 			continue
 
 		//If it has no plants yet, it should be okay to send things to it
