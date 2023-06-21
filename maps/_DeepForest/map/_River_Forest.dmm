@@ -117,7 +117,7 @@
 /turf/simulated/floor/wood/wild5,
 /area/nadezhda/dungeon/outside/hunter_cabin)
 "ay" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/reagent_containers/food/snacks/meat,
 /turf/simulated/floor/asteroid/dirt/flood/plough,
 /area/nadezhda/outside/forest/plains_farm)
@@ -219,7 +219,7 @@
 /turf/simulated/floor/rock/dark,
 /area/nadezhda/outside/forest/river_forest_underground)
 "bI" = (
-/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
 /turf/unsimulated/mineral,
 /area/nadezhda/outside/forest/river_forest_light)
 "bX" = (
@@ -2487,7 +2487,7 @@
 /turf/simulated/floor/wood/wild4,
 /area/nadezhda/outside/forest/river_forest_underground)
 "Aw" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/flood/plough,
 /area/nadezhda/outside/forest/plains_farm)
 "Ay" = (
@@ -3173,7 +3173,7 @@
 /turf/simulated/floor/asteroid/grass/jungle,
 /area/nadezhda/outside/forest/river_forest_light)
 "Hi" = (
-/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/outside/forest/river_forest_light)
 "Hl" = (
@@ -3360,7 +3360,7 @@
 /turf/simulated/floor/asteroid/dirt/mud,
 /area/nadezhda/outside/forest/river_forest_lake)
 "Jo" = (
-/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
 /turf/simulated/floor/asteroid/dirt,
 /area/nadezhda/outside/forest/river_forest_light)
 "Jq" = (

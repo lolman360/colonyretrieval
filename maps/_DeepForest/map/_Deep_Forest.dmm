@@ -442,9 +442,7 @@
 /obj/machinery/power/apc{
 	dir = 8;
 	name = "West APC";
-	pixel_x = -28;
-	coverlocked = 0;
-	locked = 0
+	pixel_x = -28
 	},
 /obj/structure/cable,
 /obj/item/circuitboard/apc,
@@ -2896,10 +2894,6 @@
 /obj/random/flora/small_jungle_tree,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/outside/meadow)
-"dgo" = (
-/obj/item/device/lighting/glowstick/flare/torch,
-/turf/simulated/floor/asteroid/dirt/dark,
-/area/colony/exposedsun/crashed_shop/outsider)
 "dhy" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/generic,
@@ -4967,6 +4961,10 @@
 /obj/structure/closet/crate,
 /turf/simulated/floor/tiled/derelict/white_small_edges,
 /area/nadezhda/outside/one_star)
+"fyx" = (
+/obj/random/mob/undergroundmob,
+/turf/simulated/floor/asteroid/dirt/dark,
+/area/colony/exposedsun/crashed_shop/outsider)
 "fze" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/simulated/floor/asteroid/dirt,
@@ -5063,11 +5061,6 @@
 /obj/effect/decal/cleanable/liquid_fuel,
 /turf/simulated/floor/plating/under,
 /area/nadezhda/dungeon/outside/prepper/vault/floor5)
-"fFA" = (
-/obj/structure/boulder,
-/obj/structure/barricade,
-/turf/simulated/floor/asteroid/dirt/dark,
-/area/colony/exposedsun/crashed_shop/outsider)
 "fFB" = (
 /obj/structure/flora/big/bush1,
 /obj/structure/flora/small/bushb3,
@@ -5317,7 +5310,7 @@
 /turf/simulated/floor/tiled/white/panels,
 /area/nadezhda/dungeon/outside/prepper)
 "fUg" = (
-/obj/machinery/hydroponics{
+/obj/machinery/portable_atmospherics/hydroponics{
 	pixel_y = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -11649,17 +11642,6 @@
 "mIL" = (
 /obj/effect/decal/cleanable/rubble,
 /obj/machinery/light_construct,
-/obj/random/gun_energy_cheap,
-/obj/random/gun_energy_cheap,
-/obj/structure/table/rack/shelf,
-/obj/item/device/manual_charger/improv,
-/obj/item/device/manual_charger/improv,
-/obj/item/cell/medium,
-/obj/random/powercell/medium_safe_lonestar,
-/obj/random/powercell/medium_safe_lonestar,
-/obj/random/powercell/small_safe_lonestar,
-/obj/random/powercell/small_safe_lonestar,
-/obj/item/cell/small/depleted,
 /turf/simulated/floor/plating/under,
 /area/colony/exposedsun/crashed_shop/outsider)
 "mIR" = (
@@ -11774,7 +11756,6 @@
 	icon_state = "cargoshwall16";
 	tag = "icon-cargoshwall16"
 	},
-/obj/structure/barricade,
 /turf/simulated/floor/asteroid/dirt/dark,
 /area/colony/exposedsun/crashed_shop/outsider)
 "mMP" = (
@@ -14648,7 +14629,7 @@
 /turf/simulated/floor/tiled/derelict/white_small_edges,
 /area/nadezhda/outside/one_star)
 "pIW" = (
-/obj/machinery/hydroponics{
+/obj/machinery/portable_atmospherics/hydroponics{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/steel/techfloor_grid,
@@ -18967,10 +18948,9 @@
 /turf/simulated/floor/tiled/derelict/white_small_edges,
 /area/nadezhda/outside/one_star)
 "ujn" = (
-/obj/effect/decal/cleanable/rubble,
-/obj/structure/barricade,
-/turf/simulated/floor/asteroid/dirt/dark,
-/area/colony/exposedsun/crashed_shop/outsider)
+/obj/landmark/join/start/outsider,
+/turf/simulated/floor/asteroid/grass,
+/area/nadezhda/outside/meadow)
 "ukp" = (
 /obj/machinery/light,
 /turf/simulated/floor/carpet,
@@ -20791,6 +20771,11 @@
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/outside/meadow)
+"wbJ" = (
+/obj/landmark/join/start/outsider,
+/obj/structure/bed/chair,
+/turf/simulated/floor/asteroid/grass,
+/area/nadezhda/outside/meadow)
 "wbZ" = (
 /obj/structure/barricade,
 /obj/random/spider_trap_burrowing/low_chance,
@@ -20897,6 +20882,13 @@
 /obj/item/remains/deer,
 /turf/simulated/floor/tiled/dark,
 /area/nadezhda/dungeon/outside/zoo)
+"wiR" = (
+/obj/landmark/join/start/outsider,
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/simulated/floor/asteroid/grass,
+/area/nadezhda/outside/meadow)
 "wiU" = (
 /turf/simulated/shuttle/wall/cargo{
 	icon_state = "cargoshwall29";
@@ -54424,9 +54416,9 @@ daI
 daI
 daI
 daI
-fFA
-jWe
-fFA
+nja
+mCD
+nja
 oMD
 daI
 daI
@@ -54626,7 +54618,7 @@ nja
 cfa
 vGA
 nja
-ujn
+cfa
 daI
 daI
 daI
@@ -54834,7 +54826,7 @@ vGA
 cfa
 mCD
 mCD
-ujn
+cfa
 nja
 cfa
 nja
@@ -57149,7 +57141,7 @@ daI
 daI
 daI
 cfa
-mCD
+fyx
 daI
 daI
 qpz
@@ -57772,7 +57764,7 @@ aZN
 mCD
 cfa
 mCD
-dgo
+mCD
 cfa
 daI
 daI
@@ -95809,7 +95801,7 @@ eOY
 tMk
 hRL
 hRL
-cPv
+wiR
 hRL
 nPq
 qxe
@@ -97890,7 +97882,7 @@ naj
 naj
 vpk
 usG
-fit
+wbJ
 hRL
 wFt
 qrg
@@ -99573,7 +99565,7 @@ wFt
 wFt
 hRL
 hRL
-hRL
+ujn
 naj
 naj
 naj

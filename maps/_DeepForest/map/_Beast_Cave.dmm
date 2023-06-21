@@ -2108,7 +2108,7 @@
 /turf/simulated/floor/wood/wild4,
 /area/nadezhda/outside/forest/beast_cave_dark)
 "iE" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/asteroid/dirt/dust,
 /area/nadezhda/outside/forest/beast_cave_light)
@@ -2222,11 +2222,11 @@
 /area/nadezhda/outside/forest/beast_cave_light)
 "ja" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dust,
 /area/nadezhda/outside/forest/beast_cave_light)
 "jb" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/snake{
@@ -6846,7 +6846,7 @@
 /area/nadezhda/outside/forest/beast_cave_dark)
 "Ju" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /mob/living/simple_animal/hostile/snake{
 	layer = 3.8;
 	name = "tree jumping viper"

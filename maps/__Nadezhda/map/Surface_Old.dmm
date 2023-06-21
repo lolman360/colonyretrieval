@@ -9168,11 +9168,11 @@
 /turf/simulated/floor/tiled/dark/bluecorner,
 /area/nadezhda/security/sechall)
 "aux" = (
-/obj/machinery/hydroponics,
+/obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/tiled/steel/gray_platform,
 /area/nadezhda/security/prisoncells)
 "auy" = (
-/obj/machinery/hydroponics,
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/steel/gray_platform,
 /area/nadezhda/security/prisoncells)
@@ -18122,7 +18122,7 @@
 /turf/simulated/floor/tiled/dark/golden,
 /area/nadezhda/absolutism/storage)
 "aOQ" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt,
 /area/nadezhda/crew_quarters/hydroponics/garden)
 "aOR" = (
@@ -20351,7 +20351,7 @@
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/outside/meadow)
 "aWH" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dust,
 /area/nadezhda/outside/forest)
 "aWI" = (
@@ -20695,7 +20695,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/nadezhda/dungeon/outside/abandoned_outpost)
 "aXW" = (
-/obj/machinery/hydroponics,
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/nadezhda/dungeon/outside/abandoned_outpost)
@@ -20737,7 +20737,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/nadezhda/dungeon/outside/abandoned_outpost)
 "aYd" = (
-/obj/machinery/hydroponics,
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 0

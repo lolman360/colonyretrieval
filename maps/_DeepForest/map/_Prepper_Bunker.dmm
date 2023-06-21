@@ -1535,7 +1535,7 @@
 /turf/simulated/floor/tiled/dark/brown_perforated,
 /area/nadezhda/dungeon/outside/prepper/vault/floor3)
 "iN" = (
-/obj/machinery/hydroponics{
+/obj/machinery/portable_atmospherics/hydroponics{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/steel/techfloor_grid,
@@ -1870,7 +1870,7 @@
 /turf/simulated/floor/tiled/dark/brown_perforated,
 /area/nadezhda/dungeon/outside/prepper/vault/floor3)
 "kk" = (
-/obj/machinery/hydroponics{
+/obj/machinery/portable_atmospherics/hydroponics{
 	pixel_y = 4
 	},
 /obj/effect/decal/cleanable/dirt,

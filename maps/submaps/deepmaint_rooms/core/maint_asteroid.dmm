@@ -209,7 +209,7 @@
 /turf/simulated/floor/plating/under,
 /area/deepmaint)
 "aT" = (
-/obj/machinery/hydroponics,
+/obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/asteroid,
 /area/deepmaint)
 "aU" = (

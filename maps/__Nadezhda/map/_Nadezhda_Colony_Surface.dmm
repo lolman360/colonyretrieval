@@ -13619,7 +13619,7 @@
 	name = "\improper Outdoors - Pad"
 	})
 "iBA" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt/dust,
 /area/nadezhda/outside/forest)
 "iBH" = (
@@ -14834,7 +14834,7 @@
 /turf/unsimulated/wall/jungle,
 /area/nadezhda/outside/forest)
 "jMB" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/portable_atmospherics/hydroponics/soil,
 /turf/simulated/floor/asteroid/dirt,
 /area/nadezhda/crew_quarters/hydroponics/garden)
 "jMR" = (
@@ -16707,7 +16707,7 @@
 /turf/unsimulated/wall/jungle,
 /area/nadezhda/outside/forest)
 "lSg" = (
-/obj/machinery/hydroponics,
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 0
@@ -21780,7 +21780,7 @@
 /turf/simulated/floor/tiled/steel/cargo,
 /area/nadezhda/hallway/surface/section1)
 "qRB" = (
-/obj/machinery/hydroponics,
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/nadezhda/dungeon/outside/abandoned_outpost)

@@ -1956,7 +1956,7 @@
 /turf/simulated/floor/tiled/steel/techfloor_grid,
 /area/nadezhda/outside/mountainsolars)
 "zi" = (
-/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/outside/mountainsolars)
 "zG" = (
@@ -2035,7 +2035,7 @@
 /turf/simulated/floor/plating/under,
 /area/nadezhda/outside/mountainsolars)
 "BI" = (
-/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
 /obj/effect/decal/cleanable/rubble,
 /turf/simulated/floor/asteroid/grass,
 /area/nadezhda/outside/mountainsolars)
@@ -2158,7 +2158,7 @@
 /area/nadezhda/outside/mountainsolars)
 "DZ" = (
 /obj/structure/flora/ausbushes/lavendergrass,
-/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
 /turf/simulated/floor/fixed/hydrotile,
 /area/nadezhda/outside/mountainsolars)
 "El" = (
@@ -2555,7 +2555,7 @@
 /turf/simulated/floor/rock,
 /area/nadezhda/outside/mountainsolars)
 "Lz" = (
-/obj/machinery/hydroponics/soil/invisible,
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible,
 /turf/simulated/mineral,
 /area/nadezhda/outside/mountainsolars)
 "LA" = (
