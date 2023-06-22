@@ -11,6 +11,8 @@
 	pixel_y = 8
 
 /obj/structure/stalker_anomaly/Crossed(atom/movable/AM)
+	if(!isliving(AM) || !isobj(AM))
+		return
 	if(last_activation + cooldown >= world.time)
 		last_activation = world.time
 		trigger_anomaly(AM)
@@ -353,20 +355,15 @@
 	var/scan_mobs = TRUE
 
 
-/obj/structure/stalker_anomaly/echo/proc/activate()
-	toggle()
 
-/obj/structure/stalker_anomaly/echo/proc/attack(mob/living/M, mob/living/user)
-	if(!scan_mobs)
-		return
 
-/obj/structure/stalker_anomaly/echo/Crossed(atom/M)
+/obj/structure/stalker_anomaly/echo/trigger_anomaly(atom/movable/AM)
 	if(istype(M, /mob/observer) || istype(M, /obj/item/projectile))
 		return
 
-	afterattack(M, M)
+	duplicate(M, M)
 
-/obj/structure/stalker_anomaly/echo/proc/afterattack(atom/target, mob/user, proximity)
+/obj/structure/stalker_anomaly/echo/proc/duplicate(atom/target, mob/user)
 	if(istype(target, /obj/item/storage))
 		return
 	if(dummy_active || !scan_mobs)
@@ -527,8 +524,6 @@
 	cooldown = 1 SECOND
 	var/vortex_damage = 50
 	var/confusion_add = 2
-	var/redboots = 100
-	var/black_and_white = 1
 	alpha = 75
 
 /obj/structure/stalker_anomaly/whirli/trigger_anomaly(atom/movable/AM)
@@ -540,7 +535,7 @@
 		H.stunned = 1
 		H.confused += confusion_add
 		H.updatehealth()
-		if(prob(redboots))
+		if(prob(80))
 			var/obj/item/organ/external/organ = H.get_organ(pick(BP_R_LEG, BP_L_LEG, BP_R_ARM, BP_L_ARM))
 			if(!organ)
 				H.visible_message(SPAN_DANGER("[H.name] is spun around by a gust of wind swirling around the [loc.name]!"), SPAN_DANGER("You're spun around by a gust of wind swirling around the [loc.name]!"))
@@ -552,7 +547,7 @@
 
 /obj/structure/stalker_anomaly/razer
 	name = "Razer"
-	desc = "Field of floating red lasers, there is a distinct smell of iron in the area around them."
+	desc = "Field of floating red wires, there is a distinct smell of iron in the area around them."
 	icon_state = "razer"
 	item_state = "razer"
 	density = FALSE
@@ -562,12 +557,8 @@
 	var/starter = TRUE
 	var/is_growing = TRUE
 	var/spread_range = 1
-	var/spread_speed_slow = 100		// Minium amount of time it takes for a grown crystal to spread
-	var/spread_speed_high = 280		// Maxium amount of time it takes for a grown crystal to spread
 
-	var/blade_runner = 100
-	var/blade_sharpness_aka_damage_per_running_on_it = 5
-	var/fuel = 15
+	var/slice_damage = 5
 
 	light_power = 2
 	light_range = 3
@@ -575,9 +566,18 @@
 	pixel_x = 0
 	pixel_y = 0
 
-/obj/structure/stalker_anomaly/razer/New()
-	..()
-	addtimer(CALLBACK(src, .proc/spread), spread_speed_slow)
+/obj/structure/stalker_anomaly/razer/Initialize()
+	. = ..()
+	if(is_growing)
+		START_PROCESSING(SSobj, src)
+
+/obj/structure/stalker_anomaly/razer/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/structure/stalker_anomaly/razer/Process()
+	if(prob(80))
+		spread()
 
 /obj/structure/stalker_anomaly/razer/non_spreader
 	is_growing = FALSE
@@ -590,13 +590,12 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/our_cutting = M
 		if(MOVING_QUICKLY(M))
-			if(prob(blade_runner))
-				to_chat(our_cutting, SPAN_WARNING("The red beam of light cuts into you."))
-				our_cutting.adjustBruteLoss(blade_sharpness_aka_damage_per_running_on_it)
-				if(!(our_cutting.species && our_cutting.species.flags & NO_BLOOD)) //We want the var for safety but we can do without the actual blood.
-					our_cutting.adjustBruteLoss(blade_sharpness_aka_damage_per_running_on_it) //FPB's get hit 2x
-					return
-				our_cutting.drip_blood(fuel)
+			to_chat(our_cutting, SPAN_WARNING("The red beam of light cuts into you."))
+			our_cutting.adjustBruteLoss(slice_damage)
+			if(!(our_cutting.species && our_cutting.species.flags & NO_BLOOD)) //We want the var for safety but we can do without the actual blood.
+				our_cutting.adjustBruteLoss(slice_damage) //FPB's get hit 2x
+				return
+			our_cutting.drip_blood(15)
 	.=..()
 
 /obj/structure/stalker_anomaly/razer/proc/spread()
@@ -615,7 +614,7 @@
 	if(turf_list.len)
 		var/turf/T = pick(turf_list)
 
-		spidersilk = /obj/structure/stalker_anomaly/razer // We spread are basic type
+		spidersilk = /obj/structure/stalker_anomaly/razer // We spread the basic type
 
 		if(is_growing)
 			spidersilk = /obj/structure/stalker_anomaly/razer/spreaded
@@ -626,9 +625,6 @@
 			new spidersilk(T) // We spread
 			if(prob(50) && !starter)
 				is_growing = FALSE
-
-	if(spidersilk && is_growing) //Anti-lag breaking the chain
-		addtimer(CALLBACK(src, .proc/spread), rand(spread_speed_slow,spread_speed_high)) //This constantly gets recalled by self. Thus to give people time to combat the shards they will get some time
 
 // Check the given turf to see if there is any special things that would prevent the spread
 /obj/structure/stalker_anomaly/razer/proc/can_twirl_to(var/turf/T)
@@ -644,55 +640,3 @@
 			return FALSE
 	return TRUE
 
-
-/obj/structure/stalker_anomaly/glacier
-	name = "Glacier"
-	desc = "Floating disk of ice, it spins slowly while never ending droplets of water form a sprite of ice underneath it. You feel as if its looking at you."
-	icon_state = "icepeak"
-	item_state = "icepeak"
-	density = FALSE
-	anchored = TRUE
-	throwpass = 1
-	layer = FLY_LAYER
-	var/grab_timer = 90
-	var/grab_timer_repeater = 120
-	var/breathtakeing = 20
-	var/fresh_ice = 2
-	var/down_hill = 2
-	var/lanth_of_ice = 3
-	pixel_x = 0
-	pixel_y = 0
-
-/*
-/mob/living/proc/trip(tripped_on, stun_duration)
-	return FALSE
-*/
-/obj/structure/stalker_anomaly/glacier/New()
-	..()
-	addtimer(CALLBACK(src, .proc/dramatics), grab_timer)
-	addtimer(CALLBACK(src, .proc/scateing_season), grab_timer_repeater)
-
-/obj/structure/stalker_anomaly/glacier/Crossed(mob/M)
-	.=..()
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.slip("\the [src.name]", fresh_ice)
-		H.adjustOxyLoss(breathtakeing)
-		H.updatehealth()
-
-/obj/structure/stalker_anomaly/glacier/proc/ice_scateing_gone_wrong(mob/M)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.throw_at(src, lanth_of_ice, down_hill, src)
-
-/obj/structure/stalker_anomaly/glacier/proc/scaters_in_the_ring(mob/M)
-	for(M in living_mobs_in_view(3, src))
-		ice_scateing_gone_wrong(M)
-
-/obj/structure/stalker_anomaly/glacier/proc/dramatics(mob/M)
-//	flick("sunshine", src)
-	addtimer(CALLBACK(src, .proc/scaters_in_the_ring), 1)
-
-/obj/structure/stalker_anomaly/glacier/proc/scateing_season()
-	addtimer(CALLBACK(src, .proc/dramatics), grab_timer)
-	addtimer(CALLBACK(src, .proc/scateing_season), grab_timer_repeater)

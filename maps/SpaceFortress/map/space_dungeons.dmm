@@ -8983,7 +8983,6 @@
 	},
 /obj/effect/window_lwall_spawn/plasma/reinforced,
 /turf/space,
-/turf/simulated/floor/plating/under,
 /area/space)
 "TK" = (
 /obj/machinery/conveyor/east,

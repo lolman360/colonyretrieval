@@ -1213,7 +1213,6 @@
 /turf/simulated/floor/tiled/steel/techfloor_grid,
 /area/centcom/evac)
 "ea" = (
-/turf/space,
 /turf/simulated/shuttle/wall{
 	dir = 8;
 	icon_state = "diagonalWall3"
@@ -1830,7 +1829,6 @@
 /turf/space/transit/north/shuttlespace_ns6,
 /area/space)
 "fG" = (
-/turf/space,
 /turf/simulated/shuttle/wall{
 	dir = 8;
 	icon_state = "diagonalWall3"
@@ -1858,7 +1856,6 @@
 /turf/space,
 /area/shuttle/syndicate_elite/mothership)
 "fK" = (
-/turf/space,
 /turf/simulated/shuttle/wall{
 	dir = 1;
 	icon_state = "diagonalWall3"
@@ -2197,7 +2194,6 @@
 	},
 /area/centcom/alien)
 "gD" = (
-/turf/space,
 /turf/simulated/shuttle/wall{
 	icon_state = "diagonalWall3"
 	},
@@ -2216,7 +2212,6 @@
 /turf/simulated/shuttle/plating,
 /area/shuttle/syndicate_elite/mothership)
 "gF" = (
-/turf/space,
 /turf/simulated/shuttle/wall{
 	dir = 4;
 	icon_state = "diagonalWall3"
@@ -5448,14 +5443,6 @@
 /obj/item/reagent_containers/food/snacks/sandwich,
 /turf/simulated/floor/tiled/cafe,
 /area/centcom/evac)
-"oW" = (
-/obj/machinery/door/blast/regular/open{
-	id = "shipjackshutters"
-	},
-/obj/effect/window_lwall_spawn/plasma/reinforced,
-/turf/space,
-/turf/simulated/floor/plating/under,
-/area/shuttle/skipjack_area)
 "oY" = (
 /obj/machinery/optable/altar,
 /turf/simulated/floor/carpet/oracarpet,
@@ -16606,7 +16593,7 @@ qH
 qH
 qH
 qH
-oW
+di
 di
 dg
 dg
@@ -18222,7 +18209,7 @@ qH
 qH
 qH
 qH
-oW
+di
 di
 dg
 dg
