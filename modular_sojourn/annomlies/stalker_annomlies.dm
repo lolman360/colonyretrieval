@@ -3,12 +3,35 @@
 	desc = "Something not meant to be seen by the eyes of players, \
 	sad."
 	icon = 'modular_sojourn/annomlies/stalker_annomlies.dmi'
+	density = FALSE
+	anchored = TRUE
+	throwpass = TRUE
 	var/active = FALSE
-	var/activated_since_last_artifactcheck = FALSE
-	var/last_activation
+	var/artifact_chance = 0.3
+	var/artifact_spit_time = 4500 //how many ticks we wait before spitting out more artifacts
+	var/last_artifact_gen = 0
+	var/list/artifact_possibility_list //what artifacts we spit out
+	var/last_activation = 0
 	var/cooldown
 	pixel_x = 8
 	pixel_y = 8
+
+/obj/structure/stalker_anomaly/Initialize()
+	..()
+	if(prob(45))
+		active = TRUE
+		START_PROCESSING(SSobj,src)
+
+/obj/structure/stalker_anomaly/Process()
+	if(prob(artifact_chance) && (world.time >= artifact_spit_time + last_artifact_gen))
+		var/obj/item/stalker_artifact/new_arti = pick(artifact_possibility_list)
+		new new_arti(get_turf(src))
+		last_artifact_gen = world.time
+
+/obj/structure/stalker_anomaly/Destroy()
+	if(is_processing)
+		STOP_PROCESSING(SSobj,src)
+	..()
 
 /obj/structure/stalker_anomaly/Crossed(atom/movable/AM)
 	if(!isliving(AM) || !isobj(AM))
@@ -27,9 +50,6 @@
 	yet a small orb of light bounces up out of it every now and again."
 	icon_state = "flash_hole"
 	item_state = "flash_hole"
-	density = FALSE
-	anchored = TRUE
-	throwpass = 1
 	cooldown = 9 SECONDS
 	layer = FLY_LAYER
 
@@ -65,9 +85,6 @@
 	desc = "A spot of hazy air, as if heatwaves rising from a hot asphalt road. Just getting close to it gives off a profound sense of warmth."
 	icon_state = "haze"
 	item_state = "haze"
-	density = FALSE
-	anchored = TRUE
-	throwpass = 1
 	alpha = 75
 	layer = FLY_LAYER
 	cooldown = 12 SECONDS
@@ -89,9 +106,7 @@
 	desc = "A pretty collection of floating lights, dangling from random points in the air, they glow softly, and are very pretty. Sadly they also get in the way."
 	icon_state = "fairy_light"
 	item_state = "fairy_light"
-	density = FALSE
-	anchored = TRUE
-	throwpass = 1
+	active = TRUE
 	layer = FLY_LAYER
 	var/starter = TRUE
 	var/is_growing = TRUE
@@ -107,14 +122,11 @@
 
 /obj/structure/stalker_anomaly/spidersilk/Initialize()
 	..()
-	if(is_growing)
+	if(is_growing && !is_processing)
 		START_PROCESSING(SSobj, src)
 
-/obj/structure/stalker_anomaly/spidersilk/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	. = ..()
-
 /obj/structure/stalker_anomaly/spidersilk/Process()
+	..()
 	if(prob(10))
 		spread()
 
@@ -182,64 +194,6 @@
 			return FALSE
 	return TRUE
 
-/obj/structure/stalker_anomaly/ball_lightning
-	name = "ball lightning"
-	desc = "A floating ball of arcing electricity, it quickly drifts through the air like a cloud, with its faint blue glow and distinct smell of ionized air."
-	icon_state = "ball_lightning"
-	item_state = "ball_lightning"
-	density = TRUE
-	anchored = FALSE
-	throwpass = FALSE
-	layer = FLY_LAYER
-	var/movement_range = 3
-	var/movement_speed_as_in_when_it_moves_not_how_active_it_moves = 2
-	var/movement_activity = 180
-	allow_spin = FALSE
-	light_power = 2
-	light_range = 3
-	light_color = "#7DF9FF"
-	var/lighting_in_a_bottle
-	var/datum/effect/effect/system/spark_spread/spark_system
-
-/obj/structure/stalker_anomaly/ball_lightning/New()
-	lighting_in_a_bottle = new /obj/item/cell/large/greyson(src)
-	addtimer(CALLBACK(src, .proc/wings), movement_activity)
-	spark_system = new()
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
-	..()
-
-/obj/structure/stalker_anomaly/ball_lightning/Destroy()
-	if(lighting_in_a_bottle)
-		qdel(lighting_in_a_bottle)
-		lighting_in_a_bottle = null
-	QDEL_NULL(spark_system)
-	..()
-
-/obj/structure/stalker_anomaly/ball_lightning/proc/wings()
-	if(!src) //Just in case
-		return
-	var/list/turf_list = list()
-	for(var/turf/T in orange(movement_range, get_turf(src)))
-		if(T.Enter(src)) // If we can "enter" on the tile then we can spread to it.
-			turf_list += T
-
-	if(turf_list.len)
-		var/turf/T = pick(turf_list)
-		///atom/movable/proc/throw_at(atom/target, range, speed, thrower)
-		throw_at(T, movement_range, movement_speed_as_in_when_it_moves_not_how_active_it_moves, src)
-
-
-	addtimer(CALLBACK(src, .proc/wings), movement_activity)
-
-/obj/structure/stalker_anomaly/ball_lightning/Bumped(atom/user)
-	if (electrocute_mob(user, lighting_in_a_bottle, src)) //electrocute_mob() handles removing charge from the cell, no need to do that here.
-		spark_system.start()
-
-/obj/structure/stalker_anomaly/ball_lightning/Bump(atom/user)
-	if (electrocute_mob(user, lighting_in_a_bottle, src)) //electrocute_mob() handles removing charge from the cell, no need to do that here.
-		spark_system.start()
-
 /obj/structure/stalker_anomaly/hell
 	name = "Radiant"
 	desc = "A floating orb of warm yellow light, yet the area around it seems to be covered in a thin layer of frost."
@@ -284,15 +238,12 @@
 	desc = "A glistening cloud of gold vapors. Small arcs of electricity dance around inside it as it slams itself forcefully into the ground, over and over."
 	icon_state = "crusher_cloud"
 	item_state = "crusher_cloud"
-	density = FALSE
-	anchored = TRUE
-	throwpass = 1
 	layer = FLY_LAYER
 	cooldown = 6 SECONDS
 	var/clunk = 1
 	var/smash_damage = 15
-	var/star_strike = 2
-	var/striek_nerves_odds = 100
+	var/cross_confusion = 2
+	var/nerve_hit_chance = 85
 
 /obj/structure/stalker_anomaly/thumper/Crossed(mob/M)
 	.=..()
@@ -301,7 +252,7 @@
 		to_chat(H, SPAN_NOTICE("\The [src] knocks you down when try to walk under it!"))
 		H.trip(src, clunk)
 		H.take_overall_damage(smash_damage)
-		H.confused += star_strike
+		H.confused += cross_confusion
 		H.updatehealth()
 
 /obj/structure/stalker_anomaly/thumper/proc/gravitational_theory(mob/M)
@@ -517,9 +468,6 @@
 	desc = "An intense vortex of air, dust and debris spirals around this area. Even just standing around it gives the intense feeling of a powerful vacuum force pulling you in."
 	icon_state = "whirli"
 	item_state = "whirli"
-	density = FALSE
-	anchored = TRUE
-	throwpass = 1
 	layer = FLY_LAYER
 	cooldown = 1 SECOND
 	var/vortex_damage = 50
@@ -550,9 +498,6 @@
 	desc = "Field of floating red wires, there is a distinct smell of iron in the area around them."
 	icon_state = "razer"
 	item_state = "razer"
-	density = FALSE
-	anchored = TRUE
-	throwpass = 1
 	layer = FLY_LAYER
 	var/starter = TRUE
 	var/is_growing = TRUE
@@ -576,7 +521,8 @@
 	. = ..()
 
 /obj/structure/stalker_anomaly/razer/Process()
-	if(prob(80))
+	..()
+	if(!prob(80))
 		spread()
 
 /obj/structure/stalker_anomaly/razer/non_spreader

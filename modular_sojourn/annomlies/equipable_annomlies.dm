@@ -5,8 +5,8 @@
 	w_class = ITEM_SIZE_TINY
 	icon_state = "wow_this_is_trash"
 	item_state = "wow_this_is_trash"
-	var/annomlie_givith = FALSE
-	var/to_remove_givith = FALSE
+	var/constant_effect = FALSE
+	var/ticking_effect = FALSE
 	slot_flags = SLOT_BELT
 
 /obj/item/stalker_artifact/dropped(var/mob/M)
@@ -157,3 +157,16 @@
 				H.adjustNutrition(bread_won)
 			else
 				H.adjustNutrition(grain_loss)
+
+
+/obj/item/storage/pouch/small_generic/artifact_container
+	name = "artifact pouch"
+	desc = "Can hold up to three artifacts, and confer their effect on whoever's wearing the pouch in a pocket."
+	icon_state = "small_generic_p"
+	item_state = "small_generic_p"
+	storage_slots = 3
+	max_w_class = ITEM_SIZE_SMALL
+	max_storage_space = DEFAULT_BULKY_STORAGE
+	matter = list(MATERIAL_BIOMATTER = 5, MATERIAL_PLATINUM = 3, MATERIAL_OSMIUM = 1, MATERIAL_TRITIUM = 1)
+	level = BELOW_PLATING_LEVEL //We can hide under tiles :D
+
