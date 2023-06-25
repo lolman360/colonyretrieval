@@ -202,7 +202,7 @@
 /datum/inventory_slot/store/can_equip(obj/item/I, mob/living/carbon/human/owner, disable_warning)
 	if(I.slot_flags & SLOT_DENYPOCKET)
 		if(!disable_warning)
-			to_chat(owner, SPAN_WARNING("[I] can't be holded by your [name]."))
+			to_chat(owner, SPAN_WARNING("[I] can't be held in your [name]."))
 		return FALSE
 	if(istype(I, /obj/item/storage/pouch)) // Pouches are basically equipped over the suit, they just take up pockets.
 		return TRUE
