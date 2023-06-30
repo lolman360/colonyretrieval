@@ -20,16 +20,14 @@ Kolobok/Goldfish/Gravi: +melee armor, +radiation (kolo no rads)
 	w_class = ITEM_SIZE_TINY
 	icon_state = "wow_this_is_trash"
 	item_state = "wow_this_is_trash"
-	var/constant_effect = FALSE
-	var/ticking_effect = FALSE
-	slot_flags = SLOT_BELT
 
 /obj/item/stalker_artifact/dropped(var/mob/M)
 	..()
-	update_artifact(M)
+	if(update_artifact(M))
+		take_effect(M)
 
 /obj/item/stalker_artifact/equipped(var/mob/M)
-	.=..()
+	..()
 	update_artifact(M)
 
 /obj/item/stalker_artifact/proc/update_artifact(mob/living/carbon/human/user)
@@ -42,6 +40,13 @@ Kolobok/Goldfish/Gravi: +melee armor, +radiation (kolo no rads)
 	if(is_in_pockets() || is_held())
 		return TRUE
 	return FALSE
+
+/obj/item/stalker_artifact/antibleed
+	name = "Clot Artifact"
+	desc = "Base type cot artifact."
+	var/antibleed_strength = 0.25
+
+
 
 /obj/item/storage/pouch/small_generic/artifact_container
 	name = "artifact pouch"
