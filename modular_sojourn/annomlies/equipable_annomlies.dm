@@ -23,12 +23,17 @@ Kolobok/Goldfish/Gravi: +melee armor, +radiation (kolo no rads)
 
 /obj/item/stalker_artifact/dropped(var/mob/M)
 	..()
-	if(update_artifact(M))
+	if(!update_artifact(M))
 		take_effect(M)
 
 /obj/item/stalker_artifact/equipped(var/mob/M)
 	..()
-	update_artifact(M)
+	if(update_artifact(M))
+		give_effect(M)
+
+/obj/item/stalker_artifact/proc/take_effect(var/mob/living/carbon/human/user)
+
+/obj/item/stalker_artifact/proc/give_effect(var/mob/living/carbon/human/user)
 
 /obj/item/stalker_artifact/proc/update_artifact(mob/living/carbon/human/user)
 	if(!istype(user))
@@ -45,6 +50,35 @@ Kolobok/Goldfish/Gravi: +melee armor, +radiation (kolo no rads)
 	name = "Clot Artifact"
 	desc = "Base type cot artifact."
 	var/antibleed_strength = 0.25
+	var/tox_weakness = 0.1
+
+/obj/item/stalker_artifact/antibleed/give_effect(var/mob/living/carbon/human/user)
+	START_PROCESSING(SSobj, src)
+	user.toxin_mod_perk += tox_weakness
+
+/obj/item/stalker_artifact/antibleed/take_effect(var/mob/living/carbon/human/user)
+	STOP_PROCESSING(SSobj, src)
+	user.toxin_mod_perk -= tox_weakness
+
+/obj/item/stalker_artifact/antibleed/mica
+	name = "Mica"
+	desc = "Artifact \"Mica\". Has a strong blood-clotting effect, which impedes the function of liver and kidneys."
+	antibleed_strength = 0.75
+	tox_weakness = 0.2
+
+/obj/item/stalker_artifact/antibleed/slime
+	name = "Slime"
+	desc = "A Slime artifact. When carried, the owner's wounds bleed less, but slightly impedes toxin filtration in the kidneys."
+
+/obj/item/stalker_artifact/antibleed/Process()
+	var/mob/living/carbon/human/M
+	if(ishuman(loc))
+		M = loc
+	if(istype(loc, /obj/item/storage/pouch/small_generic/artifact_container))
+		if(ishuman(loc.loc))
+			M = loc
+	if(M)
+		M.add_chemical_effect(CE_BLOODCLOT, antibleed_strength)
 
 
 
