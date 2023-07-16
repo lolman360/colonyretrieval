@@ -22,6 +22,7 @@
 	slot_flags = SLOT_BELT
 	structure_damage_factor = STRUCTURE_DAMAGE_BLADE
 	var/backstab_damage = 10
+	clickdelay_add = -0.2 //25% faster swing
 
 	has_alt_mode = TRUE
 	alt_mode_damagetype = HALLOSS
@@ -70,9 +71,9 @@
 	matter = list(MATERIAL_PLASTEEL = 3, MATERIAL_PLASTIC = 2)
 	tool_qualities = list(QUALITY_CUTTING = 20,  QUALITY_WIRE_CUTTING = 10, QUALITY_SCREW_DRIVING = 5,  QUALITY_SAWING = 1)
 	force = WEAPON_FORCE_DANGEROUS // Serrated teeth
-	armor_penetration = ARMOR_PEN_MODERATE
 	throwforce = WEAPON_FORCE_LETHAL
 	price_tag = 35
+	clickdelay_add = -0.1 //12.5% faster swing
 
 /obj/item/tool/knife/hook
 	name = "meat hook"
@@ -110,6 +111,7 @@
 	tool_qualities = list(QUALITY_CUTTING = 20, QUALITY_WIRE_CUTTING = 10)
 	attack_verb = list("slashed", "sliced", "ripped", "diced", "cut")
 	embed_mult = 1.5 // Careful not to lose it!
+	clickdelay_add = 0
 
 /obj/item/tool/knife/butch
 	name = "butcher's cleaver"
@@ -123,6 +125,7 @@
 	matter = list(MATERIAL_STEEL = 5, MATERIAL_PLASTIC = 1)
 	tool_qualities = list(QUALITY_CUTTING = 20,  QUALITY_WIRE_CUTTING = 15)
 	price_tag = 14
+	clickdelay_add = 0
 
 /obj/item/tool/knife/neotritual
 	name = "absolutism ritual knife"
@@ -159,6 +162,7 @@
 	max_upgrades = 3
 	embed_mult = 0.6
 	price_tag = 38
+	clickdelay_add = -0.1 //12.5% faster swing
 
 /obj/item/tool/knife/dagger
 	name = "dagger"
@@ -167,11 +171,12 @@
 	icon_state = "dagger"
 	item_state = "dagger"
 	matter = list(MATERIAL_PLASTEEL = 3, MATERIAL_PLASTIC = 2)
-	force = 13
+	force = 12
 	backstab_damage = 15
 	armor_penetration = ARMOR_PEN_HALF
 	throwforce = WEAPON_FORCE_ROBUST
 	price_tag = 21
+	clickdelay_add = -0.3
 
 /obj/item/tool/knife/dagger/skinning
 	name = "skinning knife"
@@ -180,7 +185,6 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "skinning"
 	item_state = "skinning"
-	armor_penetration = ARMOR_PEN_DEEP
 	tool_qualities = list(QUALITY_CUTTING = 50)
 	matter = list(MATERIAL_PLASTEEL = 8, MATERIAL_WOOD = 2, MATERIAL_DIAMOND = 3) // 5 plasteel + 2 wood, then +3 plasteel +3 diamond from whetstone.
 	price_tag = 500 // Takes diamond to make and very rare.
@@ -261,6 +265,7 @@
 	item_state = "ass_dagger"
 	reagent_flags = INJECTABLE|TRANSPARENT
 	price_tag = 10
+	clickdelay_add = -0.1 //it injects so faster
 
 /obj/item/tool/knife/dagger/assassin/New()
 	..()

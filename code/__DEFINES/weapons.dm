@@ -8,7 +8,10 @@
 #define WEAPON_FORCE_DANGEROUS		20
 #define WEAPON_FORCE_ROBUST			26
 #define WEAPON_FORCE_BRUTAL			33
+#define WEAPON_FORCE_ADVANCED			36
 #define WEAPON_FORCE_LETHAL			40
+#define WEAPON_FORCE_DEADLY			45
+#define WEAPON_FORCE_HALF			50
 #define WEAPON_FORCE_GODLIKE		88 // currently only used by the energy axe, which can only be obtained via admin verbs
 
 //Armor Penetration: Ignores a certain amount of armor for the purposes of inflicting damage.

@@ -169,7 +169,39 @@
 			return
 		else // non-adjacent click
 			if(W)
-				W.afterattack(A, src, 0, params) // 0: not Adjacent
+				var/resolved_reachattack
+				if(W.bonus_attack_range)
+					var/i = 1
+					// did we reach turf? turf heuristic - usually the first turf we found
+					var/turf/th
+					if(isturf(A))
+						th = A
+					var/turf/tadj = get_turf(src)
+					var/range = W.bonus_attack_range + 1
+					// less common but expensive case - long range tool reach
+					var/atom/movable/reachability_delegate/D = new(tadj)
+					D.pass_flags |= W.pass_flags
+					// next turf
+					var/turf/n = D.loc
+					for(i in 1 to range)
+						ASSERT(isturf(n))
+						if((n in th.AdjacentTurfs()) || (th in n.AdjacentTurfs()))
+							// succeeded
+							qdel(D)
+							resolved_reachattack = (LEGACY_SEND_SIGNAL(W, COMSIG_IATTACK, A, src, params)) || (LEGACY_SEND_SIGNAL(A, COMSIG_ATTACKBY, W, src, params)) || W.resolve_attackby(A, src, params)
+							break
+						// dumb directional pathfinding both for cheapness and for practical purposes
+						// so you can't snake-arms round a row of windows or something crazy
+						n = get_step(D, get_dir(D, th))
+						if(!D.Move(n))
+							// failed
+							qdel(D)
+							break
+						// keep going
+					// at this point, we failed
+					qdel(D)
+				if(!resolved_reachattack && A && W)
+					W.afterattack(A, src, 0, params) // 0: not Adjacent
 			else
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN) // no ranged spam
 				RangedAttack(A, params)
@@ -417,3 +449,8 @@
 			return
 		T.attack_hand(src)
 */
+
+/atom/movable/reachability_delegate
+	alpha = 0 //invis
+	mouse_opacity = 0 //we dont want to be clicked on or seen etc
+	pass_flags = PASSTABLE
