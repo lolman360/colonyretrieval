@@ -37,7 +37,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 1 //Returning 1 passes an abort signal upstream
 	add_fingerprint(user)
 	if(ishuman(user) && !(user == A) && !(user.loc == A) && (w_class >=  ITEM_SIZE_NORMAL) && wielded && user.a_intent == I_HURT && !istype(src, /obj/item/gun) && !istype(A, /obj/structure) && !istype(A, /turf/simulated/wall))
-		swing_attack(src, user, params)
+		swing_attack(src, user, params, get_turf(A))
 		return 1 //Swinging calls attackby later on
 	return A.attackby(src, user, params)
 
@@ -171,7 +171,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	target.hit_with_weapon(src, user, power, hit_zone)
 	return
 
-/obj/item/proc/swing_attack(atom/A, mob/user, params)
+/obj/item/proc/swing_attack(atom/A, mob/user, params, var/turf/source)
 	var/holdinghand = user.get_inventory_slot(src)
 	var/turf/R
 	var/turf/C
@@ -180,9 +180,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/_y
 	var/_z
 	if(A.x == 0 && A.y == 0 && A.z == 0) //Attacking equipped items results in them getting forwarded
-		_x = user.x
-		_y = user.y
-		_z = user.z
+		_x = source.x
+		_y = source.y
+		_z = source.z
 	else
 		_x = A.x
 		_y = A.y

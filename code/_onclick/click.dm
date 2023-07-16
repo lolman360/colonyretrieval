@@ -176,6 +176,8 @@
 					var/turf/th
 					if(isturf(A))
 						th = A
+					else
+						th = get_turf(A)
 					var/turf/tadj = get_turf(src)
 					var/range = W.bonus_attack_range + 1
 					// less common but expensive case - long range tool reach
