@@ -78,6 +78,7 @@
 
 
 //Flags for items (equipment)
+//TODO: split these to equipment and item flags
 #define THICKMATERIAL              0x1  // Prevents syringes, parapens and hyposprays if equiped to slot_suit or slot_head.
 #define STOPPRESSUREDAMAGE         0x2  // Counts towards pressure protection. Note that like temperature protection, body_parts_covered is considered here as well.
 #define AIRTIGHT                   0x4  // Functions with internals.
@@ -89,6 +90,7 @@
 #define EQUIP_SOUNDS               0x100// Play sound when equipped/unequipped
 #define ABSTRACT			       0x200// For items that don't really exist. Can't be put on tables or interacted with.
 #define BLUESPACE                  0x400// For items that use bluespace technology
+#define IGNORE_REACHABILITY_LOS    0x800 //ignores line of sight for reachability calculations. respects bonus_attack_range.
 
 // Flags for pass_flags.
 #define PASSTABLE  0x1

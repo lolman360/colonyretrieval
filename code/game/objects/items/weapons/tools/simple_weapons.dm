@@ -61,7 +61,7 @@
 	wielded_icon = "fireaxe1"
 	sharp = TRUE
 	edge = TRUE
-	armor_penetration = ARMOR_PEN_DEEP
+	armor_penetration = ARMOR_PEN_MODERATE
 	tool_qualities = list(QUALITY_CUTTING = 10, QUALITY_PRYING = 20, QUALITY_SAWING = 15)
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
@@ -124,7 +124,7 @@
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTEEL = 3)
 	force = WEAPON_FORCE_DANGEROUS
 	throwforce = WEAPON_FORCE_NORMAL
-	armor_penetration = ARMOR_PEN_MODERATE
+	armor_penetration = ARMOR_PEN_SHALLOW
 	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("chopped", "torn", "cut", "cleaved", "slashed")
 	tool_qualities = list(QUALITY_CUTTING = 10)
@@ -466,11 +466,11 @@
 
 /obj/item/tool/knife/ritual/blade
 	name = "awakened blade"
-	desc = "The last stage of ascension a ritual knife, its latent powers fully awoken by the crayons' magic. \
-			Suspiciously glowing runes are drawn on its surface that glow at random intervals."
+	desc = "The last stage of ascension a ritual knife, its latent powers fully awoken by  magic. \
+			Suspicious runes are drawn on its surface that glow at random intervals."
 	icon_state = "crayon_blade"
 	matter = list(MATERIAL_PLASTEEL = 15, MATERIAL_STEEL = 2, MATERIAL_DIAMOND = 1)
-	force = WEAPON_FORCE_ROBUST + 4 // 30 damage
+	force = WEAPON_FORCE_ADVANCED
 	armor_penetration = ARMOR_PEN_MASSIVE // More balanced than psi weapons with psi mania perk.
 	w_class = ITEM_SIZE_BULKY
 	max_upgrades = 2
@@ -549,7 +549,7 @@
 	toggleable = TRUE
 	worksound = WORKSOUND_HAMMER
 	switched_on_forcemult = 3.3 //33
-	armor_penetration = ARMOR_PEN_MODERATE
+	armor_penetration = ARMOR_PEN_DEEP
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 7)
 	attack_verb = list("punched", "decked", "haymakered", "uppercut")
@@ -597,6 +597,8 @@
 	throw_speed = 3
 	edge = TRUE
 	sharp = TRUE
+	bonus_attack_range = 1
+	can_broad_strike = FALSE
 	tool_qualities = list(QUALITY_CUTTING = 10)
 	origin_tech = list(TECH_COMBAT = 1)
 	hitsound = 'sound/weapons/slice.ogg' // Sounds more like a stab than a cut.
@@ -739,14 +741,14 @@
 	icon_state = "katana_old"
 	item_state = "katana"
 	force = WEAPON_FORCE_DANGEROUS
-	armor_penetration = ARMOR_PEN_EXTREME
+	armor_penetration = ARMOR_PEN_GRAZING
 
 /obj/item/tool/cheap/spear
-	name = "cheap spear"
+	name = "cheap shortspear"
 	desc = "A spear of acceptable quality, mass-produced by Lonestar. Place sharp end towards enemy."
 	icon_state = "cheap_spear"
 	item_state = "cheap_spear"
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BACK|SLOT_BELT
 	throwforce = WEAPON_FORCE_BRUTAL
 	throw_speed = 3

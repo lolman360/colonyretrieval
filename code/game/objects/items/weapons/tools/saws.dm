@@ -13,7 +13,8 @@
 	edge = TRUE
 	tool_qualities = list(QUALITY_SAWING = 35, QUALITY_CUTTING = 20, QUALITY_WIRE_CUTTING = 20)
 	price_tag = 20
-	embed_mult = 1 //Serrated blades catch on bone more easily
+	forced_broad_strike = TRUE
+	embed_mult = 1 //Serrated blades catch on flesh more easily
 
 /obj/item/tool/saw/bs
 	name = "bluespace metal saw"
@@ -92,7 +93,7 @@
 	hitsound = WORKSOUND_CHAINSAW
 	worksound = WORKSOUND_CHAINSAW
 	force = WEAPON_FORCE_WEAK
-	switched_on_forcemult = 4 //28 total
+	switched_on_forcemult = 4.5 //28 total
 	w_class = ITEM_SIZE_NORMAL
 	armor_penetration = ARMOR_PEN_SHALLOW
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTEEL = 10, MATERIAL_PLASTIC = 2)
@@ -127,7 +128,7 @@
 	hitsound = WORKSOUND_CHAINSAW
 	worksound = WORKSOUND_CHAINSAW
 	force = WEAPON_FORCE_WEAK
-	switched_on_forcemult = 4 //28 total
+	switched_on_forcemult = 4.5 //28 total
 	w_class = ITEM_SIZE_NORMAL
 	armor_penetration = ARMOR_PEN_SHALLOW
 	matter = list(MATERIAL_SILVER = 2, MATERIAL_PLASTEEL = 10, MATERIAL_PLASTIC = 3)

@@ -230,6 +230,15 @@
 	data["force"] = force
 	data["force_max"] = initial(force) * 10
 
+	data["edge"] = edge
+	data["sharp"] = sharp
+	data["clickdelay_add"] = clickdelay_add + 8
+	data["extended_reach"] = bonus_attack_range
+	data["broad_strike"] = can_broad_strike
+	data["forced_broad_strike"] = forced_broad_strike
+	data["push_attack"] = push_attack
+	data["w_class"] = w_class
+
 	data["armor_penetration"] = armor_penetration
 
 	data["extra_volume"] = extra_bulk

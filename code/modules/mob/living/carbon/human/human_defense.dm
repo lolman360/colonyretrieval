@@ -244,8 +244,23 @@ meteor_act
 	if(!affecting)
 		return FALSE
 
+
+//If not blocked, handle broad strike attacks
+	if(((I.sharp && I.edge && user.a_intent == I_DISARM && I.can_broad_strike) || I.forced_broad_strike))
+		var/list/L[] = BP_ALL_LIMBS
+		effective_force /= 3
+		L.Remove(hit_zone)
+		for(var/i in 1 to 2)
+			var/temp_zone = pick(L)
+			L.Remove(temp_zone)
+			..(I, user, effective_force, temp_zone)
+
+	//Push attacks
+	if(hit_zone == BP_GROIN && I.push_attack && user.a_intent == I_GRAB)
+		step_glide(src, get_dir(user, src), DELAY2GLIDESIZE(0.4 SECONDS))
+		visible_message(SPAN_WARNING("[src] is pushed away by the attack!"))
 	// Handle striking to cripple.
-	if(user.a_intent == I_DISARM)
+	if(user.a_intent == I_HELP)
 		effective_force /= 2 //half the effective force
 		if(!..(I, user, effective_force, hit_zone))
 			return FALSE

@@ -256,6 +256,7 @@ Frequency:
 	icon_state = "telespear"
 	item_state = "telespear"
 	slot_flags = SLOT_BACK
+	bonus_attack_range = 1 //the funny
 	var/entropy_value = 1
 	price_tag = 350
 

@@ -84,6 +84,10 @@
 	var/post_penetration_dammult = 1 //how much damage do we do post-armor-penetation
 	//Does not affect damage dealt to mobs
 	var/bonus_attack_range = 0
+	var/clickdelay_add = 0 //how much clickdelay do we add? useful for fast- or slow-swinging weapons. default clickdelay is 8ds
+	var/can_broad_strike = TRUE
+	var/forced_broad_strike = FALSE //If a weapon is forced to always perform broad strikes.
+	var/push_attack = FALSE			//Hammers and spears can push the victim away on hit when you aim groin.
 
 	var/list/item_upgrades = list()
 
@@ -121,7 +125,7 @@
 	var/alt_mode_lossrate = 0.5
 	var/alt_mode_sharp = FALSE
 
-	var/clickdelay_add = 0 //how much clickdelay do we add? useful for fast- or slow-swinging weapons. default clickdelay is 8ds
+	
 
 /obj/item/Initialize()
 

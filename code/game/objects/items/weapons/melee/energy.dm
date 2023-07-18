@@ -213,6 +213,7 @@
 	throw_speed = 3 // Same as normal spear
 	throw_range = 7
 	w_class = ITEM_SIZE_HUGE // It's a long spear
+	bonus_attack_range = 1
 	slot_flags = SLOT_BACK
 	flags = CONDUCT // It's a metal pole, you're a literal lightning rod while holding it
 	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4)

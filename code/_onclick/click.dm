@@ -169,6 +169,7 @@
 			return
 		else // non-adjacent click
 			if(W)
+				
 				var/resolved_reachattack
 				if(W.bonus_attack_range)
 					var/i = 1
@@ -202,6 +203,9 @@
 						// keep going
 					// at this point, we failed
 					qdel(D)
+				if((W.item_flags & IGNORE_REACHABILITY_LOS) && !resolved_reachattack)
+					if(get_dist(get_turf(W), get_turf(A)) <= W.bonus_attack_range + 1)
+						resolved_reachattack = (LEGACY_SEND_SIGNAL(W, COMSIG_IATTACK, A, src, params)) || (LEGACY_SEND_SIGNAL(A, COMSIG_ATTACKBY, W, src, params)) || W.resolve_attackby(A, src, params)
 				if(!resolved_reachattack && A && W)
 					W.afterattack(A, src, 0, params) // 0: not Adjacent
 			else

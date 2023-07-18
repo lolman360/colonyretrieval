@@ -99,6 +99,14 @@
 			{{:data.armor_penetration}}
 		</div>
 
+
+		<div class="itemLabel">
+			Attack cooldown:
+		</div>
+		<div class="itemContent">
+			{{:data.clickdelay_add}} deciseconds
+		</div>
+
 		{{if data.extra_volume}}
 			<div class="itemLabel">
 				Extra tank volume:
@@ -127,4 +135,47 @@
 			</table>
 		</div>
 	{{/if}}
+
+	<h4>Unique weapon properties:</h4>
+
+		{{if data.extended_reach}}
+			<div class="itemLabel">
+				Range on wield:
+			</div>
+			<div class="itemContent">
+				{{:data.extended_reach}} tile(s) of reach on regular attacks
+			</div>
+		{{/if}}
+
+		{{if data.w_class > 2}}
+			<div class="itemLabel">
+				Harm intent and wielded:
+			</div>
+			<div class="itemContent">
+				Swing
+			</div>
+		{{/if}}
+
+		{{if data.push_attack}}
+			<div class="itemLabel">
+				Aiming groin on disarm intent:
+			</div>
+			<div class="itemContent">
+				Push target one tile away
+			</div>
+		{{/if}}
+
+		{{if data.sharp && data.edge && data.can_broad_strike}}
+			{{if data.forced_broad_strike}}
+				<h5>Forced broad strike</h5>
+			{{else}}
+				<div class="itemLabel">
+					Disarm intent:
+				</div>
+				<div class="itemContent">
+					Broad strike
+				</div>
+			{{/if}}
+		{{/if}}
+
 </div>

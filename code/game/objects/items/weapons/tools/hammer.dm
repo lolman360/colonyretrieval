@@ -15,13 +15,15 @@
 	effective_faction = list("spider") // Spiders are weak to crushing.
 	damage_mult = 2
 	hitsound = 'sound/weapons/smash.ogg'
-
+	clickdelay_add = 1
+	push_attack = TRUE
 	has_alt_mode = TRUE
 	alt_mode_damagetype = HALLOSS
 	alt_mode_sharp = FALSE
 	alt_mode_verbs = list("bashes", "stunts", "wacks", "blunts")
 	alt_mode_toggle = "loosens their grip on the handle of their weapon"
 	alt_mode_lossrate = 0.4
+	
 
 
 /obj/item/tool/hammer/deadblow
@@ -41,7 +43,7 @@
 	icon_state = "powered_hammer"
 	item_state = "powered_hammer"
 	wielded_icon = "powered_hammer_on"
-	switched_on_forcemult = 2.2 //33 total
+	switched_on_forcemult = 2.4 //33 total
 	structure_damage_factor = STRUCTURE_DAMAGE_BREACHING
 	w_class = ITEM_SIZE_BULKY
 	slot_flags = SLOT_BELT|SLOT_BACK
@@ -60,6 +62,7 @@
 	item_state_slots = list(
 		slot_back_str = "onehammer_back"
 		)
+	clickdelay_add = 2
 
 /obj/item/tool/hammer/powered_hammer/turn_on(mob/user)
 
@@ -84,7 +87,7 @@
 	icon_state = "onehammer"
 	item_state = "onehammer"
 	wielded_icon = "onehammer_on"
-	switched_on_forcemult = 2.6 // 39 total
+	switched_on_forcemult = 2.8 // 39 total
 	armor_penetration = ARMOR_PEN_EXTREME // Retains AP when turned off - it's a hammer.
 	structure_damage_factor = STRUCTURE_DAMAGE_DESTRUCTIVE
 	matter = list(MATERIAL_STEEL = 4, MATERIAL_PLATINUM = 3, MATERIAL_DIAMOND = 3)
@@ -105,7 +108,7 @@
 	icon_state = "sledgehammer"
 	item_state = "sledgehammer0"
 	wielded_icon = "sledgehammer1"
-	force = WEAPON_FORCE_LETHAL
+	force = WEAPON_FORCE_EXTREME + 10
 	slot_flags = SLOT_BELT|SLOT_BACK
 	armor_penetration = ARMOR_PEN_EXTREME
 	throwforce = WEAPON_FORCE_LETHAL
@@ -118,6 +121,7 @@
 	structure_damage_factor = STRUCTURE_DAMAGE_BREACHING
 	tool_qualities = list(QUALITY_HAMMERING = 45)
 	price_tag = 2000
+	clickdelay_add = 3
 
 /obj/item/tool/hammer/homewrecker
 	name = "homewrecker"
@@ -129,12 +133,13 @@
 	armor_penetration = ARMOR_PEN_EXTREME
 	w_class = ITEM_SIZE_BULKY
 	slot_flags = SLOT_BELT|SLOT_BACK
-	force = WEAPON_FORCE_ROBUST
+	force = WEAPON_FORCE_BRUTAL
 	tool_qualities = list(QUALITY_HAMMERING = 15)
 	attack_verb = list("attacked", "smashed", "bludgeoned", "beaten")
 	structure_damage_factor = STRUCTURE_DAMAGE_HEAVY
 	max_upgrades = 5
 	price_tag = 15
+	clickdelay_add = 2
 
 /obj/item/tool/hammer/ironhammer
 	name = "Seinemetall Defense \"Ironhammer\" Breaching Hammer"
@@ -150,6 +155,7 @@
 	structure_damage_factor = STRUCTURE_DAMAGE_BORING
 	tool_qualities = list(QUALITY_HAMMERING = 40, QUALITY_PRYING = 1)
 	matter = list(MATERIAL_STEEL = 30, MATERIAL_PLASTIC = 10, MATERIAL_PLASTEEL = 15)
+	clickdelay_add = 1
 
 /obj/item/tool/hammer/ironhammer/attack()
 	..()
@@ -165,8 +171,8 @@
 	price_tag = 30
 
 	armor_penetration = ARMOR_PEN_DEEP
-	force = WEAPON_FORCE_DANGEROUS
-
+	force = WEAPON_FORCE_DANGEROUS + 4
+	clickdelay_add = 1
 	tool_qualities = list(QUALITY_HAMMERING = 20)
 
 /obj/item/tool/hammer/mace/makeshift
@@ -212,7 +218,7 @@
 	wielded_icon = "chargehammer1"
 	item_state = "chargehammer0"
 	w_class = ITEM_SIZE_HUGE
-	force = WEAPON_FORCE_DANGEROUS
+	force = WEAPON_FORCE_ROBUST
 	switched_on_forcemult = 2.2
 	armor_penetration = ARMOR_PEN_EXTREME // Retains AP when turned off - it's a hammer.
 	structure_damage_factor = STRUCTURE_DAMAGE_BREACHING
@@ -223,6 +229,7 @@
 	suitable_cell = /obj/item/cell/medium
 	use_power_cost = 15
 	price_tag = 420 // Has a rocket engine on it.
+	clickdelay_add = 1
 	var/datum/effect/effect/system/trail/T
 	var/last_launch
 

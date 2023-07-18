@@ -373,6 +373,32 @@
 	max_upgrades = 4
 	price_tag = 1500
 
+//POLEARMS
+/obj/item/tool/spear/rift_trident
+	icon_state = "rift"
+	item_state = "rift"
+	wielded_icon = "rift_wielded"
+	name = "Rift"
+	desc = "It's a large trident, with a tip seems to only partially exist in this world- a characteristic which allows it to attack even through obstructions, up to a good distance away. \
+			Probably made by some mad acolyte of an unformed god, resident of some far-away chaotic abyss. "
+	throw_speed = 3
+	edge = TRUE
+	sharp = TRUE
+	bonus_attack_range = 3
+	tool_qualities = list(QUALITY_CUTTING = 45)
+	attack_verb = list("attacked", "stabbed", "jabbed", "torn", "gored", "smote", "distorted")
+	embed_mult = 0 //it can't get stuck
+	price_tag = 3500
+	force = WEAPON_FORCE_ROBUST
+	throwforce = WEAPON_FORCE_DANGEROUS
+	armor_penetration = ARMOR_PEN_HALF
+	throw_speed = 3
+	max_upgrades = 2 //it's already very, very powerful
+
+	item_state_slots = list(
+		slot_back_str = "rift"
+		)
+
 /obj/item/tool/saw/hyper/doombringer
 	name = "\"Doombringer\" chainsword"
 	desc = "An anomalous weapon created by an unknown person (or group?), their work marked by a blue cross, these weapons are known to vanish and reappear when left alone. \

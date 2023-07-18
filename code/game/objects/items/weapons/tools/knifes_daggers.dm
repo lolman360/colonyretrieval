@@ -22,7 +22,7 @@
 	slot_flags = SLOT_BELT
 	structure_damage_factor = STRUCTURE_DAMAGE_BLADE
 	var/backstab_damage = 10
-	clickdelay_add = -0.2 //25% faster swing
+	clickdelay_add = -2 //25% faster swing
 
 	has_alt_mode = TRUE
 	alt_mode_damagetype = HALLOSS
@@ -73,7 +73,7 @@
 	force = WEAPON_FORCE_DANGEROUS // Serrated teeth
 	throwforce = WEAPON_FORCE_LETHAL
 	price_tag = 35
-	clickdelay_add = -0.1 //12.5% faster swing
+	clickdelay_add = -1 //12.5% faster swing
 
 /obj/item/tool/knife/hook
 	name = "meat hook"
@@ -162,7 +162,7 @@
 	max_upgrades = 3
 	embed_mult = 0.6
 	price_tag = 38
-	clickdelay_add = -0.1 //12.5% faster swing
+	clickdelay_add = -1 //12.5% faster swing
 
 /obj/item/tool/knife/dagger
 	name = "dagger"
@@ -176,7 +176,7 @@
 	armor_penetration = ARMOR_PEN_HALF
 	throwforce = WEAPON_FORCE_ROBUST
 	price_tag = 21
-	clickdelay_add = -0.3
+	clickdelay_add = -3
 
 /obj/item/tool/knife/dagger/skinning
 	name = "skinning knife"
@@ -265,7 +265,7 @@
 	item_state = "ass_dagger"
 	reagent_flags = INJECTABLE|TRANSPARENT
 	price_tag = 10
-	clickdelay_add = -0.1 //it injects so faster
+	clickdelay_add = -1 //it injects so faster
 
 /obj/item/tool/knife/dagger/assassin/New()
 	..()
