@@ -1040,7 +1040,7 @@
 /obj/item/tool/resolve_attackby(atom/A, mob/user, params)
 	if(isBroken)
 		to_chat(user, SPAN_WARNING("\The [src] is broken."))
-		return
+		return 1
 	.=..()
 	//If the parent return value is true, then there won't be an attackby
 	//If there will be an attackby, we'll handle it there

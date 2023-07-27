@@ -379,17 +379,18 @@
 	item_state = "rift"
 	wielded_icon = "rift_wielded"
 	name = "Rift"
-	desc = "It's a large trident, with a tip seems to only partially exist in this world- a characteristic which allows it to attack even through obstructions, up to a good distance away. \
+	desc = "It's a large trident, with a tip seems to only partially exist in this world- a characteristic which allows it to attack even through walls, up to a good distance away. \
 			Probably made by some mad acolyte of an unformed god, resident of some far-away chaotic abyss. "
 	throw_speed = 3
 	edge = TRUE
 	sharp = TRUE
-	bonus_attack_range = 3
+	bonus_attack_range = 4
+	item_flags = IGNORE_REACHABILITY_LOS
 	tool_qualities = list(QUALITY_CUTTING = 45)
-	attack_verb = list("attacked", "stabbed", "jabbed", "torn", "gored", "smote", "distorted")
+	attack_verb = list("portal-poked", "rifttorn", "spatially jabbed", "remotely gored", "smited", "distorted")
 	embed_mult = 0 //it can't get stuck
 	price_tag = 3500
-	force = WEAPON_FORCE_ROBUST
+	force = WEAPON_FORCE_DANGEROUS
 	throwforce = WEAPON_FORCE_DANGEROUS
 	armor_penetration = ARMOR_PEN_HALF
 	throw_speed = 3
@@ -398,6 +399,40 @@
 	item_state_slots = list(
 		slot_back_str = "rift"
 		)
+
+/obj/item/tool/spear/rift_trident/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
+	new /obj/effect/effect/rift_attack(get_turf(target))
+	..()
+	
+
+/obj/effect/effect/rift_attack
+	name = "rift attack"
+	icon = 'icons/obj/spatial_cut.dmi'
+	icon_state = ""
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/effect/effect/rift_attack/Initialize()
+	switch(rand(0,3))
+		if(0)
+			icon_state = "trident_1"
+			pixel_x = -8
+			pixel_y = -8
+		if(1)
+			icon_state = "trident_2"
+			pixel_x = -8
+			pixel_y = 8
+		if(2)
+			icon_state = "trident_3"
+			pixel_x = 8
+			pixel_y = 8
+		if(3)
+			icon_state = "trident_4"
+			pixel_x = 8
+			pixel_y = -8
+	..()
+	QDEL_IN(src, 8)
+
+
 
 /obj/item/tool/saw/hyper/doombringer
 	name = "\"Doombringer\" chainsword"

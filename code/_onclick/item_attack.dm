@@ -147,7 +147,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/hit_zone = M.resolve_item_attack(src, user, target_zone)
 	if(hit_zone)
 		apply_hit_effect(M, user, hit_zone)
-
 	return TRUE
 
 //Called when a weapon is used to make a successful melee attack on a mob. Returns the blocked result
